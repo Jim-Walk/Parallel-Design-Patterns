@@ -1,0 +1,26 @@
+#!/bin/bash --login
+
+# PBS job options (name, compute nodes, job time)
+#PBS -N pollutionprac
+#PBS -l select=72
+#PBS -l walltime=00:20:00
+
+# To get exclusive node usage
+#PBS -l place=excl
+
+#PBS -A d167
+
+# Change to the directory that the job was submitted from
+cd $PBS_O_WORKDIR
+
+# Load any required modules
+module load mpt
+module load intel-compilers-18
+
+# Set the number of threads to 1
+#   This prevents any threaded system libraries from automatically
+#   using threading.
+export OMP_NUM_THREADS=1
+
+# Launch the parallel job
+mpiexec_mpt -n 1 -ppn 1 ./serial 128 1024 3e-3 0
