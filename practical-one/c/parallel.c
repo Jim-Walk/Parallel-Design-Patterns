@@ -89,11 +89,11 @@ int main(int argc, char * argv[]) {
 	initialise(u_k, u_kp1, localnx, ny);
     // set halos to zero
     /*
-    for (i = 0; i<ny; i++){
+    for (i = 1; i<=ny; i++){
         u_k[i] = 0;
-        u_k[nx * ny + i] = 0;
+        u_k[mem_size_x * ny + i] = 0;
     } 
-    */
+    */ 
 	double rnorm=0.0, bnorm=0.0, norm, local_bnorm=0, local_rnorm=0;
 
 	// Calculate the initial residual norm
@@ -113,11 +113,11 @@ int main(int argc, char * argv[]) {
 	for (k=0;k<MAX_ITERATIONS;k++) {
 		// The halo swapping will likely need to go in here
         
-        MPI_Issend(&u_k[localnx-1], ny, MPI_DOUBLE, next, 0, MPI_COMM_WORLD, &request);
+        MPI_Issend(&u_k[(localnx+1)*mem_size_y], ny, MPI_DOUBLE, next, 0, MPI_COMM_WORLD, &request);
         MPI_Recv(&u_k[0], ny, MPI_DOUBLE, prev, 0, MPI_COMM_WORLD, &status);
 
-        MPI_Issend(&u_k[1], ny, MPI_DOUBLE, next, 0, MPI_COMM_WORLD, &request);
-        MPI_Recv(&u_k[localnx], ny, MPI_DOUBLE, prev, 0, MPI_COMM_WORLD, &status);
+        MPI_Issend(&u_k[mem_size_y], ny, MPI_DOUBLE, prev, 0, MPI_COMM_WORLD, &request);
+        MPI_Recv(&u_k[mem_size_y * (localnx)], ny, MPI_DOUBLE, next, 0, MPI_COMM_WORLD, &status);
 
 		local_rnorm=0.0;
 		// Calculates the current residual norm
@@ -146,8 +146,7 @@ int main(int argc, char * argv[]) {
 		temp=u_kp1; u_kp1=u_k; u_k=temp;
 
 		if (k % REPORT_NORM_PERIOD == 0) {
-            printf("Rank %d: Iteration= %d Relative Norm=%e\n", rank, k, norm);
-            printf("rnorm: %f\n", rnorm);
+            if (rank == 0) printf("Rank %d: Iteration= %d Relative Norm=%e\n", rank, k, norm);
         }
 	}
 	printf("\nRank %d: Terminated on %d iterations, Relative Norm=%e, Total time=%e seconds\n", rank, k, norm,
