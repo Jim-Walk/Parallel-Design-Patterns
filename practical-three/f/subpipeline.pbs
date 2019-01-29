@@ -1,0 +1,32 @@
+#!/bin/bash --login
+
+# PBS job options (name, compute nodes, job time)
+#PBS -N pollutionprac
+#PBS -l select=1:ncpus=36
+#PBS -l place=scatter:excl
+#PBS -l walltime=00:20:00
+
+#PBS -A d167
+
+# Change to the directory that the job was submitted from
+cd $PBS_O_WORKDIR
+
+# Load any required modules
+module load mpt
+module load intel-compilers-18
+
+# Set the number of threads to 1
+#   This prevents any threaded system libraries from automatically
+#   using threading.
+export OMP_NUM_THREADS=1
+
+# There are thirty input files, this is a helper loop to build up the input string passing each file into the pipeline
+# For testing runs you can reduce this number by reducing the 30, i.e. seq 1 1 will only include one input file to the pipeline
+inputfiles=""
+for i in `seq 1 30`;
+do
+    inputfiles+="../data/input_$i "
+done
+
+# Launch the parallel job
+mpiexec_mpt -n 5 -ppn 5 ./pipeline 128 1024 3e-3 0 $inputfiles

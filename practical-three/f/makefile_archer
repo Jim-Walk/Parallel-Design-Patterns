@@ -1,0 +1,22 @@
+LFLAGS=-lm
+CC=ftn
+CFLAGS=-G2
+BSCTOOLS_HOME=/work/y07/y07/cse/bsctools
+
+SRCS=$(wildcard *.F90)
+PROGS = $(patsubst %.F90,%,$(SRCS))
+
+all: $(PROGS)
+
+%: %.F90
+	$(CC) $(CFLAGS) -o $@ $< $(LFLAGS)
+
+instrumented: LFLAGS+=-dynamic
+instrumented: CFLAGS+=-DINSTRUMENTED=1
+instrumented: $(PROGS)
+
+clean: 
+	rm -f $(PROGS)
+
+.PHONY: all instrumented clean
+

@@ -1,0 +1,22 @@
+LFLAGS=-lm
+CC=cc
+CFLAGS=-G2
+BSCTOOLS_HOME=/work/y07/y07/cse/bsctools
+
+SRCS=$(wildcard *.c)
+PROGS = $(patsubst %.c,%,$(SRCS))
+
+all: $(PROGS)
+
+%: %.c
+	$(CC) $(CFLAGS) -o $@ $< $(LFLAGS)
+
+instrumented: LFLAGS+=-dynamic
+instrumented: CFLAGS+=-DINSTRUMENTED=1
+instrumented: $(PROGS)
+
+clean: 
+	rm -f $(PROGS)
+
+.PHONY: all instrumented clean
+

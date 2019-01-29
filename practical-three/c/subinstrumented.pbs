@@ -1,0 +1,30 @@
+#!/bin/bash --login
+#PBS -N practical
+#PBS -l select=1
+#PBS -l walltime=00:10:00
+#PBS -j oe
+#PBS -A d167
+
+echo Starting job
+
+# Make sure any symbolic links are resolved to absolute path
+export PBS_O_WORKDIR=$(readlink -f $PBS_O_WORKDIR)
+
+# Change to the direcotry that the job was submitted from
+cd $PBS_O_WORKDIR
+
+export EXTRAE_CONFIG_FILE=extrae.xml
+export EXTRAE_HOME=/work/y07/y07/cse/bsctools/extrae/3.4.1/cray-mpich
+
+source $EXTRAE_HOME/etc/extrae.sh
+export LD_PRELOAD=$EXTRAE_HOME/lib/libmpitrace.so
+
+inputfiles=""
+for i in `seq 1 30`;
+do
+    inputfiles+="../data/input_$i "
+done
+
+mkdir -p results
+
+aprun -n 5 ./pipeline 128 1024 3e-3 0 $inputfiles
