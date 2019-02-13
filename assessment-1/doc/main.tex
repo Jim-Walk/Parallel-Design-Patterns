@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{courier}
 
 \title{Parallel Design Patterns 1}
 \author{B138813}
@@ -9,8 +10,15 @@
 
 \maketitle
 \begin{description}
-    \item [1(a).] Select a parallel algorithm to be used for this problem. Discuss context, advantages and disadvangtages to this pattern
+    \item [1(a).]
+
+    The first pattern we recommend for this problem is the \textbf{Actor Pattern}. We make this suggestion as the problem domain can be expressed as entities, which map, on a 1:1 basis, to actors. These actors are squirrels, grid cells and squirrel master. Squirrels and grid cells have a one to one mapping with the functionality described in the details of the biologists model, i.e. a grid cell will have a populationInflux value. This mapping is a notable advantage as it will make it much easier for biologists to understand the final code. We also have to oppourtunity to reuse the biologist's function to map the x,y locatio of a squirrel to a grid cell number, and make that grid cell number the rank of the grid process in an MPI implemenation. The squirell master would be able to act both as a clock, to instruct grid cells if a two or three month interval had passed, which would then adjust the populationInflux and infectionLevel of all land cells. The squirrel master could also keep a list of live and dead squirrels, to ensure that no more than 200 squirrels are created, and to terminate the program if all squirrels die or the simulation time has ellapsed. When a squirrel is born, the squirrel master can simply ressurct a squirrel to be reused. Another key advantage of this model is its extensiblity, in that if the biologists wish to create a preditor animal for the simulation, they only need to create another actor, rather than restructuring and rethinking their entire code base.
+
+    However, that is not to say there are not drawbacks to the actor pattern for this problem domain. It is very difficult to design any form of locality in the actor pattern, which means that squirrel processes may communicate with grid processes very far away from themselves, leading to latency. For this model, the number of cells is 16 and the maximum number of squirrels is 200, so data locality isn't too much of a priority, but it may become more of an issue at large scales. It is noteworthy that the actor pattern can be very difficult to debug, as squirrels and land cells will interact in a way that inevitably becomes harder and harder to determin as the simulation continues. Whilst this unpredicitablity does closely follow the biologist's model, it will make the simulation difficult to debug.
+
+
+
 \end{description}
 
 \end{document}
-% 
+%
