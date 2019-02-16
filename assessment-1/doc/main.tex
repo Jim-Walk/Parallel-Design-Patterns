@@ -30,7 +30,11 @@ We would implement the actor pattern with MPI and C. We have chosen MPI because 
 For hardware we would preferably use a large compute cluster of roughly 15, where each node in the cluster has the ability to run at least 16 parallel processes (non-GPU). We suggust this as it would give us more than enough processes to run 200 squirrels, 16 grid sqaures and 1 squirrel master, with room to begin testing larger grids. \newline
 
 \noindent\textbf{2(a).} \newline
+We would recommend against using the \textbf{Pipeline Pattern}.It will be unsuitible no matter what data elements the problem is decomposed into, as a sense of global time will be needed at month intervals to assess the populationInflux and infectionLevel variables. As such, the pipeline will regularly block until all elements, squirrels or grids, are at the same time step. This stuttering of time spent processing would lead to bulk synchronicity, preventing operations from being run concurrently on different data elelments.
 
+It is also conceptially difficult to map this problem to \textbf{Recursive Task Parallelism}. Whilst the squirrel simulation can be decomposed into tasks, it does not fully map to a recursive task pattern, which works best when tasks are completely asynchronus. Unfortunately, as we found with the pipeline pattern, the simulation must synchronise each month to calculate the populationInflux and infectionLevel values. However, even if this hurdle were overcome using some sort of shared memory model, either with openMP or PGAS, we would still face the problem of how to break this problem down into recursive tasks.  We could potentially think of squirrels as tasks, moving across a grid held in shared memory, and spawning new squirrel tasks when appropriate. The major downside of this approach is that we would not have any way to track the global number of squirrels in the simulation, and be able to shut it down when we reach 200 squirrels. \newline
+
+\noindent\textbf{3(a).} \newline
 
 
 \end{document}
