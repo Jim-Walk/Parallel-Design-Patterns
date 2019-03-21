@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include "mpi.h"
-#include "pool.h"
+#include "../lib/pool.h"
 
 static void workerCode();
 
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 		int i, activeWorkers=0, returnCode;
 		MPI_Request initialWorkerRequests[10];
 		for (i=0;i<10;i++) {
-			int workerPid = startWorkerProcess();
+			int workerPid = startWorkerProcess(0);
 			MPI_Irecv(NULL, 0, MPI_INT, workerPid, 0, MPI_COMM_WORLD, &initialWorkerRequests[i]);
 			activeWorkers++;
 			printf("Master started worker %d on MPI process %d\n", i , workerPid);
