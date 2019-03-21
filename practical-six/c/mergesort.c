@@ -3,7 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
+<<<<<<< HEAD
 #include "omp.h"
+=======
+>>>>>>> 4a03d7af79658e5bbcf5474b2be1c7edb18ea14d
 
 static void sort(double*, int, int);
 static void merge(double*, int, int);
@@ -17,6 +20,7 @@ int main(int argc, char * argv[]) {
 		return -1;
 	}
    omp_set_nested(1);
+
 	int data_length=atoi(argv[1]);
 	int serial_threshold=atoi(argv[2]);
 	int should_displayData=atoi(argv[3]);	
@@ -49,13 +53,13 @@ static void sort(double * data, int length, int serial_threshold) {
 	if (length < serial_threshold) {
 		qsort(data, length, sizeof(double), qsort_compare_function);
 	} else {
-         int pivot=length/2;
+		int pivot=length/2;
 
-         sort(data, pivot, serial_threshold);
-         
-         sort(&data[pivot], length-pivot, serial_threshold);
-         merge(data, pivot, length);
-    }
+		sort(data, pivot, serial_threshold);
+		sort(&data[pivot], length-pivot, serial_threshold);
+
+		merge(data, pivot, length);
+	}
 }
 
 static int qsort_compare_function(const void * a, const void * b) {
