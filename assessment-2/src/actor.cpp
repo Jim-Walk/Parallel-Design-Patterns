@@ -22,3 +22,7 @@ void Actor::start_up(){
     MPI_Status status;
     MPI_Recv(&worker_type, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
 }
+
+void Actor::run(){
+    printf("this is a stub, please implement in child class\n");
+}

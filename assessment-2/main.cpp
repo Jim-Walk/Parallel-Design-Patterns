@@ -2,6 +2,8 @@
 #include <string>
 #include "./include/actor.hpp"
 #include "./include/master.hpp"
+#include "./include/grid_cell.hpp"
+#include "./include/squirrel.hpp"
 #include <mpi.h>
 #include "./lib/pool.h"
 
@@ -31,13 +33,7 @@ int main(){
         while (master.is_running()){
             master.run_simulation();
         }
-
-
-        int master_status = masterPoll();
-        while (master_status){
-            master_status = masterPoll();
-        }
-
+        std::cout << "master complete" << std::endl;
     }
 
 
@@ -48,23 +44,26 @@ int main(){
 
 
 static void worker_code(){
-    int worker_status = 1;
-    while (worker_status){
-        int rank;
-        MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-        Actor a = Actor(rank);
-        std::cout << "Worker start on rank " << rank << std::endl;
-        a.start_up();
-        std::cout << "Worker type " << a.get_type() << std::endl;
-        // recv squirell or grid cell command
-        // if squirrel
-        //      while not dead squirrel
-        //              do squirrel stuff
-        //              maybe die
-        //
-        //      while wait
-        //              check if i'm wake or simulation ends
-
-        worker_status = workerSleep();
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    Actor a = Actor(rank);
+    a.start_up();
+    if (a.get_type() == 2){
+       Grid_cell gc = Grid_cell(a); 
+       gc.run();
+    } else if (a.get_type() == 1){
+        Squirrel sq = Squirrel(a);
+        sq.run();
     }
+    
+    // recv squirell or grid cell command
+    // if squirrel
+    //      while not dead squirrel
+    //              do squirrel stuff
+    //              maybe die
+    //
+    //      while wait
+    //              check if i'm wake or simulation ends
+
+    std::cout << "Worker end on rank " << rank << std::endl;
 }

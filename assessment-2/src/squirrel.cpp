@@ -8,14 +8,22 @@ void Squirrel::initialise(){
     state = 2;
     infected = false;
     active = true;
+    alive = true;
     initialiseRNG(&state);
 }
 
 void Squirrel::run(){
     initialise();
     while (active){
-        move();
+        if (alive)
+            move();
+        check_active();
     }
+}
+
+void Squirrel::check_active(){
+    std::cout << id << "sq: check if active" << std::endl; 
+    active = false;
 }
 
 void Squirrel::move(){
@@ -33,7 +41,7 @@ void Squirrel::move(){
     if (infected){
         infect_cell(current_cell);
         if (willDie(&state)){
-            active = false;
+            alive = false;
             return;
         }
     }
@@ -47,11 +55,11 @@ void Squirrel::move(){
 }
 
 void Squirrel::infect_cell(int cell){
-    std::cout << "infecting " << cell << std::endl;
+    std::cout << id << ": infecting " << cell << std::endl;
 }
 
 float Squirrel::get_inf_level(int cell){
-    std::cout << "getting level from " << cell << std::endl;
+    std::cout << id << ": getting level from " << cell << std::endl;
     return 2;
 }
 

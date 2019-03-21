@@ -16,7 +16,6 @@ void Master::set_up(){
         cmd = 2; 
         workerRank = startWorkerProcess();
         MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
-        grid_ids.push_back(workerRank);
         squirrel_ids.push_back(workerRank);
     }
     running = true;
@@ -34,6 +33,6 @@ bool Master::is_running(){
 }
 
 void Master::run_simulation(){
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(2));
     running = false;
 }

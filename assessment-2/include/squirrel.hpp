@@ -4,6 +4,8 @@
 
 class Squirrel : public Actor {
     public:
+        Squirrel(Actor const& a) : Actor(a){
+        }
         void run();
         void move();    
         void initialise();
@@ -12,11 +14,12 @@ class Squirrel : public Actor {
     private:
        float pos_x, pos_y; 
        float temp_x, temp_y; 
-       bool active, infected;
+       bool active, alive, infected;
        long state;
 
        void give_birth(float x, float y);
        float get_pop(int cell);
+       void check_active();
 
 };
 
