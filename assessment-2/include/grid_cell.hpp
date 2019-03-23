@@ -5,15 +5,16 @@
 class Grid_cell : Actor {
     public:
         Grid_cell(Actor const& a) : Actor(a) {
+            active = true;
         }
         void run();
     private:
         // values
         float avg_inf;
-        int inf_count;
+        float inf_count;
 
         float avg_pop;
-        int pop_count;
+        float pop_count;
         
         bool month_update;
 
@@ -21,7 +22,6 @@ class Grid_cell : Actor {
         void check_for_month();
         void exchange_pop();
         void exchange_inf();
-        void check_active();
 };
 
 #endif

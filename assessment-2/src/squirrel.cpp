@@ -1,18 +1,17 @@
+#include <iostream>
+#include <cstdlib>
+#include <numeric>
+#include <mpi.h>
 #include "../lib/squirrel-functions.h"
 #include "../include/squirrel.hpp"
 #include "../lib/ran2.h"
-#include <iostream>
-#include <cstdlib>
 
 void Squirrel::initialise(){
-    state = 2;
-    infected = false;
-    active = true;
-    alive = true;
     initialiseRNG(&state);
 }
 
 void Squirrel::run(){
+    printf("%d: start Squirrel\n", id);
     initialise();
     while (active){
         if (alive)
@@ -21,10 +20,6 @@ void Squirrel::run(){
     }
 }
 
-void Squirrel::check_active(){
-    std::cout << id << "sq: check if active" << std::endl; 
-    active = false;
-}
 
 void Squirrel::move(){
     squirrelStep(pos_x, pos_y, &temp_x, &temp_y, &state);
@@ -33,42 +28,70 @@ void Squirrel::move(){
 
     int current_cell = getCellFromPosition(pos_x, pos_y);
     // get info from current_cell
-    float avg_inf_level = get_inf_level(current_cell);
-    if (willCatchDisease(avg_inf_level, &state)){
+    update_inf_history(current_cell);
+    float avg_inf = std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
+    if (willCatchDisease(avg_inf, &state)){
         infected = true;
     }
 
     if (infected){
         infect_cell(current_cell);
         if (willDie(&state)){
-            alive = false;
+            die();
             return;
         }
     }
 
-    float avg_pop = get_pop(current_cell);
+    update_pop_history(current_cell);
+    float avg_pop = std::accumulate(pop_history.begin(), pop_history.end(), 0.0) / pop_history.size();
     if (willGiveBirth(avg_pop, &state)){
-        give_birth(pos_x, pos_y);
+        give_birth(current_cell);
     }
 
-    std::cout << id << ": I moved" << std::endl;
+    //std::cout << id << ": I moved" << std::endl;
 }
 
 void Squirrel::infect_cell(int cell){
-    std::cout << id << ": infecting " << cell << std::endl;
+//    std::cout << id << ": infecting " << cell << std::endl;
 }
 
 float Squirrel::get_inf_level(int cell){
-    std::cout << id << ": getting level from " << cell << std::endl;
+//    std::cout << id << ": getting level from " << cell << std::endl;
     return 2;
 }
 
-void Squirrel::give_birth(float x, float y){
-    std::cout << id << ": I gave birth at " << x << ","<< y << std::endl;
+void Squirrel::give_birth(int cell){
+    std::cout << id << ": I gave birth at " << cell << std::endl;
+}
+
+void Squirrel::update_pop_history(int cell){
+    float new_population = get_pop(cell);
+    if (pop_history.size() > 49){
+        pop_history.pop_back();
+        pop_history.push_front(new_population);
+    } else {
+        pop_history.push_front(new_population);
+    }
+}
+
+void Squirrel::update_inf_history(int cell){
+    float new_inf = get_inf_level(cell);
+    if (inf_history.size() > 49){
+        inf_history.pop_back();
+        inf_history.push_front(new_inf);
+    } else {
+        inf_history.push_front(new_inf);
+    }
 }
 
 float Squirrel::get_pop(int cell){
-    std::cout << id << ": getting pop from " << cell << std::endl;
-    return 2;
-    
+    float pop = 0;
+    send_msg(cell, MSG::STEP);
+    data_recv(&pop);
+    return pop;
+}
+
+void Squirrel::die(){
+   // workerSleep();
+    alive = false;
 }

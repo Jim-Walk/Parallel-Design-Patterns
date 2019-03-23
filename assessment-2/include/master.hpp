@@ -9,22 +9,21 @@ class Master : public Actor {
         }
 
         int create_actor(int worker_type);
-        bool is_running();
+        bool is_active();
         void set_up();
         void set_total_squirrels(int squirrels){
             total_squirrels = squirrels;
         }
         void create_sq(int id);
-        void run_simulation();
+        void run();
 
 
     private: 
-        const int num_grid_cells = 4; 
+        const int num_grid_cells = 16; 
         int live_squirrels = 0;
         int total_squirrels;
         std::vector<int> squirrel_ids;
         std::vector<int> grid_ids;
-        bool running;
 };
 
 #endif

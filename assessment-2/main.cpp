@@ -27,15 +27,13 @@ int main(){
         printf("master rank %d \n", myRank); 
         Master master = Master(myRank);
         master.set_total_squirrels(total_squirrels);
-        master.set_up();
         // Start grid cell and squirell processes
-
-        while (master.is_running()){
-            master.run_simulation();
-        }
+        master.set_up();
+        
+        master.run();
+        
         std::cout << "master complete" << std::endl;
     }
-
 
     processPoolFinalise();
     MPI_Finalize();
@@ -48,22 +46,11 @@ static void worker_code(){
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     Actor a = Actor(rank);
     a.start_up();
-    if (a.get_type() == 2){
+    if (a.get_type() == 1){
        Grid_cell gc = Grid_cell(a); 
        gc.run();
-    } else if (a.get_type() == 1){
+    } else if (a.get_type() == 2){
         Squirrel sq = Squirrel(a);
         sq.run();
     }
-    
-    // recv squirell or grid cell command
-    // if squirrel
-    //      while not dead squirrel
-    //              do squirrel stuff
-    //              maybe die
-    //
-    //      while wait
-    //              check if i'm wake or simulation ends
-
-    std::cout << "Worker end on rank " << rank << std::endl;
 }

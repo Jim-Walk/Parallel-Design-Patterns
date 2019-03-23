@@ -1,7 +1,10 @@
-#include "../include/grid_cell.hpp"
+#include <mpi.h>
 #include <iostream>
+#include "../include/grid_cell.hpp"
+#include <tuple>
 
 void Grid_cell::run(){
+    //printf("%d: start grid cell\n", id);
     while (active){
         if (month_update){
             avg_pop = pop_count;
@@ -15,22 +18,25 @@ void Grid_cell::run(){
         exchange_inf();
         check_active();
     }
+    printf("gc %d: done, pop %f, inf %f\n", id, pop_count, inf_count);
 }
 
 void Grid_cell::check_for_month(){
-    std::cout << id << ": checking if month has changed" << std::endl; 
+    //std::cout << id << ": checking if month has changed" << std::endl; 
     month_update = false;
 }
 
 void Grid_cell::exchange_pop(){
-    std::cout << id << ": getting pop count and tell squirrl pop level" << std::endl;
+
+    bool recvd;
+    int rank = -1;
+    std::tie(recvd, rank) = msg_recv();
+    if (recvd){
+        pop_count++;
+        send_data(rank, avg_pop);
+    }
 }
 void Grid_cell::exchange_inf(){
-    std::cout << id << ": getting inf count and tell squirrl inf level" << std::endl;
-}
-
-void Grid_cell::check_active(){
-    std::cout << id << ": checking if active" << std::endl;
-    active = false;
+//    std::cout << id << ": getting inf count and tell squirrl inf level" << std::endl;
 }
 

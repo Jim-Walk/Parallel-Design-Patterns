@@ -18,7 +18,7 @@ void Master::set_up(){
         MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
         squirrel_ids.push_back(workerRank);
     }
-    running = true;
+    active = true;
 }
 
 int Master::create_actor(int actor_type){
@@ -28,11 +28,15 @@ int Master::create_actor(int actor_type){
 }
 
 
-bool Master::is_running(){
-    return running;
+bool Master::is_active(){
+    return active;
 }
 
-void Master::run_simulation(){
+void Master::run(){
     std::this_thread::sleep_for(std::chrono::seconds(2));
-    running = false;
+   
+    if (live_squirrels == 0){
+    // End the simulation by active changing to false
+        active = false;
+    }
 }
