@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
+<<<<<<< HEAD
+#include "omp.h"
+=======
+>>>>>>> 4a03d7af79658e5bbcf5474b2be1c7edb18ea14d
 
 static void sort(double*, int, int);
 static void merge(double*, int, int);
@@ -15,6 +19,7 @@ int main(int argc, char * argv[]) {
 		fprintf(stderr, "You must provide three command line arguments, the number of elements to be sorted, the serial threshold and whether to display raw and sorted data\n");
 		return -1;
 	}
+   omp_set_nested(1);
 
 	int data_length=atoi(argv[1]);
 	int serial_threshold=atoi(argv[2]);
@@ -27,8 +32,14 @@ int main(int argc, char * argv[]) {
 	}
 	struct timeval start_time, end_time;
 	gettimeofday(&start_time, NULL);
-	sort(data, data_length, serial_threshold);
-	gettimeofday(&end_time, NULL);
+#pragma omp parallel
+   {
+#pragma omp single
+      {
+      sort(data, data_length, serial_threshold);
+      }
+   }
+   gettimeofday(&end_time, NULL);
 	if (should_displayData) {
 		printf("\nSorted\n");
 		displayData(data, data_length);
