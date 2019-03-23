@@ -29,17 +29,20 @@ void Squirrel::move(){
     int current_cell = getCellFromPosition(pos_x, pos_y);
     // get info from current_cell
     update_inf_history(current_cell);
-    float avg_inf = std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
-    if (willCatchDisease(avg_inf, &state)){
-        infected = true;
+    float avg_inf = 50;//std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
+    if (!infected){
+        if (willCatchDisease(avg_inf, &state)){
+            infected = true;
+            printf("%d: is infected!\n", id);
+        }
     }
-
     if (infected){
         infect_cell(current_cell);
         if (willDie(&state)){
             die();
+            printf("%d: I died!\n", id);
             return;
-        }
+        } 
     }
 
     update_pop_history(current_cell);

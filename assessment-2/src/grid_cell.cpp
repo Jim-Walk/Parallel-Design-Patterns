@@ -37,6 +37,12 @@ void Grid_cell::exchange_pop(){
     }
 }
 void Grid_cell::exchange_inf(){
-//    std::cout << id << ": getting inf count and tell squirrl inf level" << std::endl;
+    bool recvd;
+    int rank = -1;
+    std::tie(recvd, rank) = msg_recv();
+    if (recvd){
+        inf_count++;
+        send_data(rank, avg_pop);
+    }
 }
 
