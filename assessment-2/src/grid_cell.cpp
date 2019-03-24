@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../include/grid_cell.hpp"
 #include <tuple>
+#include <limits>
 
 void Grid_cell::run(){
     //printf("%d: start grid cell\n", id);
@@ -18,7 +19,7 @@ void Grid_cell::run(){
         exchange_inf();
         check_active();
     }
-    printf("gc %d: done, pop %f, inf %f\n", id, pop_count, inf_count);
+    printf("gc %d: done, pop %f, inf %f\n", id, avg_pop, avg_inf);
 }
 
 void Grid_cell::check_for_month(){
@@ -29,20 +30,23 @@ void Grid_cell::check_for_month(){
 void Grid_cell::exchange_pop(){
 
     bool recvd;
-    int rank = -1;
-    std::tie(recvd, rank) = msg_recv();
+    int rank, msg  = -1;
+    std::tie(recvd, rank, msg) = msg_recv();
     if (recvd){
-        pop_count++;
+        avg_pop++;
         send_data(rank, avg_pop);
     }
 }
 void Grid_cell::exchange_inf(){
     bool recvd;
-    int rank = -1;
-    std::tie(recvd, rank) = msg_recv();
+    int rank, msg  = -1;
+    std::tie(recvd, rank, msg) = msg_recv();
     if (recvd){
-        inf_count++;
-        send_data(rank, avg_pop);
+        if (msg == MSG::INFSTEP){
+            if (avg_inf < std::numeric_limits<float>::max())
+                avg_inf++;
+        }
+        send_data(rank, avg_inf);
     }
 }
 

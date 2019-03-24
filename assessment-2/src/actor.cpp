@@ -21,13 +21,13 @@ void Actor::send_data(int dest, float data){
 int Actor::get_id(){
     return id;
 }
-int Actor::get_type(){
-    return worker_type;
+Actor::actor_type Actor::get_type(){
+    return act_type;
 }
 
 void Actor::start_up(){
     MPI_Status status;
-    MPI_Recv(&worker_type, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+    MPI_Recv(&act_type, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
 }
 
 void Actor::run(){
@@ -42,8 +42,10 @@ void Actor::check_active(){
     }
 }
 
-// might need to extend this to deal with message
-std::tuple<bool, int> Actor::msg_recv(){
+/* Returns a bool indicating if message was received, 
+ * which rank it was recieved from, and the message
+   itself */
+std::tuple<bool, int, int> Actor::msg_recv(){
     int rank, msg, msg_flag = 0;
     MPI_Status stat;
     MPI_Iprobe(MPI_ANY_SOURCE, 0, MPI_COMM_WORLD,&msg_flag, &stat);
@@ -51,7 +53,7 @@ std::tuple<bool, int> Actor::msg_recv(){
         rank = stat.MPI_SOURCE;
         MPI_Recv(&msg, 1, MPI_INT, rank, 0, MPI_COMM_WORLD, &stat);
     }
-    return std::make_tuple(msg_flag == 1, rank);
+    return std::make_tuple(msg_flag == 1, rank, msg);
 }
 
 bool Actor::data_recv(float *data){

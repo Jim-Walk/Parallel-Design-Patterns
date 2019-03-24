@@ -1,10 +1,11 @@
+#include <mpi.h>
 #include <iostream>
 #include <string>
 #include "./include/actor.hpp"
 #include "./include/master.hpp"
 #include "./include/grid_cell.hpp"
 #include "./include/squirrel.hpp"
-#include <mpi.h>
+#include "./include/clock.hpp"
 #include "./lib/pool.h"
 
 static void worker_code();
@@ -28,7 +29,6 @@ int main(){
         Master master = Master(myRank);
         master.set_total_squirrels(total_squirrels);
         // Start grid cell and squirell processes
-        master.set_up();
         
         master.run();
         
@@ -46,11 +46,14 @@ static void worker_code(){
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     Actor a = Actor(rank);
     a.start_up();
-    if (a.get_type() == 1){
+    if (a.get_type() == Actor::actor_type::GRID){
        Grid_cell gc = Grid_cell(a); 
        gc.run();
-    } else if (a.get_type() == 2){
+    } else if (a.get_type() == Actor::actor_type::SQ || a.get_type() == Actor::actor_type::INFSQ){
         Squirrel sq = Squirrel(a);
         sq.run();
+    } else if (a.get_type() == Actor::actor_type::CLOCK){
+        Clock c = Clock(a);
+        c.run();
     }
 }

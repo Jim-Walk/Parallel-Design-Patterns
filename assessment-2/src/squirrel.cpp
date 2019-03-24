@@ -2,19 +2,18 @@
 #include <cstdlib>
 #include <numeric>
 #include <mpi.h>
+#include "../lib/pool.h"
 #include "../lib/squirrel-functions.h"
 #include "../include/squirrel.hpp"
 #include "../lib/ran2.h"
 
 void Squirrel::initialise(){
-    initialiseRNG(&state);
 }
 
 void Squirrel::run(){
     printf("%d: start Squirrel\n", id);
-    initialise();
     while (active){
-        if (alive)
+        if (get_alive())
             move();
         check_active();
     }
@@ -29,15 +28,13 @@ void Squirrel::move(){
     int current_cell = getCellFromPosition(pos_x, pos_y);
     // get info from current_cell
     update_inf_history(current_cell);
-    float avg_inf = 50;//std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
-    if (!infected){
+    float avg_inf = std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
+    if (!get_infected() ){
         if (willCatchDisease(avg_inf, &state)){
-            infected = true;
+            set_infected(true);
             printf("%d: is infected!\n", id);
         }
-    }
-    if (infected){
-        infect_cell(current_cell);
+    } else {
         if (willDie(&state)){
             die();
             printf("%d: I died!\n", id);
@@ -51,16 +48,27 @@ void Squirrel::move(){
         give_birth(current_cell);
     }
 
-    //std::cout << id << ": I moved" << std::endl;
 }
 
-void Squirrel::infect_cell(int cell){
-//    std::cout << id << ": infecting " << cell << std::endl;
+//TODO Consider merging these functions so we only need
+//     to send and recieve one message each step
+float Squirrel::get_pop(int cell){
+    float pop = 0;
+    send_msg(cell, MSG::STEP);
+    data_recv(&pop);
+    return pop;
 }
 
 float Squirrel::get_inf_level(int cell){
-//    std::cout << id << ": getting level from " << cell << std::endl;
-    return 2;
+    float inf = 0;
+
+    if (!get_infected()){
+        send_msg(cell, MSG::STEP);
+    } else {
+        send_msg(cell, MSG::INFSTEP);
+    }
+    data_recv(&inf);
+    return inf;
 }
 
 void Squirrel::give_birth(int cell){
@@ -87,14 +95,34 @@ void Squirrel::update_inf_history(int cell){
     }
 }
 
-float Squirrel::get_pop(int cell){
-    float pop = 0;
-    send_msg(cell, MSG::STEP);
-    data_recv(&pop);
-    return pop;
+bool Squirrel::get_infected(){
+    return act_type == actor_type::INFSQ;
 }
 
-void Squirrel::die(){
-   // workerSleep();
-    alive = false;
+void Squirrel::set_infected(bool inf){
+    if (inf){
+        act_type = actor_type::INFSQ;
+    } else {
+        act_type = actor_type::SQ;
+    }
 }
+
+// tell master I have died, and die
+void Squirrel::die(){
+    send_msg(0, MSG::STOP);
+    set_alive(false);
+}
+
+bool Squirrel::get_alive(){
+    return act_type != actor_type::DEADSQ;
+}
+
+void Squirrel::set_alive(bool live){
+    // all squirrels are born healthy
+    if (live){
+        act_type = actor_type::SQ;
+    } else { //dead
+        act_type = actor_type::DEADSQ;
+    }
+}
+

@@ -6,6 +6,11 @@ class Grid_cell : Actor {
     public:
         Grid_cell(Actor const& a) : Actor(a) {
             active = true;
+            avg_pop = 0;
+            avg_inf = 0;
+
+            inf_count = 0;
+            pop_count = 0;
         }
         void run();
     private:

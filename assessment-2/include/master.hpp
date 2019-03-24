@@ -8,22 +8,28 @@ class Master : public Actor {
         Master(int id) : Actor(id){
         }
 
-        int create_actor(int worker_type);
         bool is_active();
         void set_up();
         void set_total_squirrels(int squirrels){
             total_squirrels = squirrels;
         }
-        void create_sq(int id);
+        int create_sq(float pos_x,float pos_y);
         void run();
 
 
     private: 
+        // Variables
         const int num_grid_cells = 16; 
         int live_squirrels = 0;
         int total_squirrels;
+        int initial_inf_sq = 2;
         std::vector<int> squirrel_ids;
+        std::vector<int> dead_squirrel_ids;
         std::vector<int> grid_ids;
+
+        // Functions
+        void kill_squirrels();
+        void birth_squirrels();
 };
 
 #endif
