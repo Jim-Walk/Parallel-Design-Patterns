@@ -35,10 +35,8 @@ void Actor::run(){
 }
 
 void Actor::check_active(){
-    //std::cout << id << ": check if active" << std::endl; 
     if (shouldWorkerStop()){
         active = false;
-//        std::cout << "Worker end on rank " << id << std::endl;
     }
 }
 
@@ -46,12 +44,15 @@ void Actor::check_active(){
  * which rank it was recieved from, and the message
    itself */
 std::tuple<bool, int, int> Actor::msg_recv(){
-    int rank, msg, msg_flag = 0;
+    int msg_flag = 0;
+    int rank, msg = -1; // make sure rank and message refer to things that don't exist
     MPI_Status stat;
     MPI_Iprobe(MPI_ANY_SOURCE, 0, MPI_COMM_WORLD,&msg_flag, &stat);
     if (msg_flag){
         rank = stat.MPI_SOURCE;
         MPI_Recv(&msg, 1, MPI_INT, rank, 0, MPI_COMM_WORLD, &stat);
+        if (id == 0)
+            printf("msg recv from %d, msg %d\n", rank, msg);
     }
     return std::make_tuple(msg_flag == 1, rank, msg);
 }

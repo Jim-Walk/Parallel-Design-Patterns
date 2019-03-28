@@ -13,8 +13,11 @@ void Squirrel::initialise(){
 void Squirrel::run(){
     printf("%d: start Squirrel\n", id);
     while (active){
-        if (get_alive())
+        if (get_alive()){
             move();
+        } else {
+            break;
+        }
         check_active();
     }
 }
@@ -25,7 +28,7 @@ void Squirrel::move(){
     pos_x = temp_x;
     pos_y = temp_y;
 
-    int current_cell = getCellFromPosition(pos_x, pos_y);
+    int current_cell = getCellFromPosition(pos_x, pos_y) +1;
     // get info from current_cell
     update_inf_history(current_cell);
     float avg_inf = std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
@@ -37,7 +40,6 @@ void Squirrel::move(){
     } else {
         if (willDie(&state)){
             die();
-            printf("%d: I died!\n", id);
             return;
         } 
     }
@@ -47,13 +49,15 @@ void Squirrel::move(){
     if (willGiveBirth(avg_pop, &state)){
         give_birth(current_cell);
     }
-
 }
 
 //TODO Consider merging these functions so we only need
 //     to send and recieve one message each step
 float Squirrel::get_pop(int cell){
     float pop = 0;
+    if (cell == 0){
+        printf("%d wtf why am I stepping on 0\n", id);
+    }
     send_msg(cell, MSG::STEP);
     data_recv(&pop);
     return pop;
@@ -72,7 +76,7 @@ float Squirrel::get_inf_level(int cell){
 }
 
 void Squirrel::give_birth(int cell){
-    std::cout << id << ": I gave birth at " << cell << std::endl;
+    send_msg(0, MSG::START);
 }
 
 void Squirrel::update_pop_history(int cell){
@@ -110,6 +114,7 @@ void Squirrel::set_infected(bool inf){
 // tell master I have died, and die
 void Squirrel::die(){
     send_msg(0, MSG::STOP);
+    printf("%d: I died\n", id);
     set_alive(false);
 }
 
@@ -126,3 +131,6 @@ void Squirrel::set_alive(bool live){
     }
 }
 
+void Squirrel::check_alive(){
+
+}      

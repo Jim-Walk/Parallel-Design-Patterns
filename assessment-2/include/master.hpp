@@ -20,16 +20,16 @@ class Master : public Actor {
     private: 
         // Variables
         const int num_grid_cells = 16; 
-        int live_squirrels = 0;
+        int live_squirrels = 4;
         int total_squirrels;
         int initial_inf_sq = 2;
         std::vector<int> squirrel_ids;
+        std::vector<int> inf_squirrel_ids;
         std::vector<int> dead_squirrel_ids;
         std::vector<int> grid_ids;
 
         // Functions
-        void kill_squirrels();
-        void birth_squirrels();
+        void manage_squirrels();
 };
 
 #endif

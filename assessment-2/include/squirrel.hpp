@@ -25,6 +25,7 @@ class Squirrel : public Actor {
         void initialise();
         float get_inf_level(int cell);
         void infect_cell(int cell);
+        void check_alive();
     private:
        float pos_x, pos_y; 
        float temp_x, temp_y; 

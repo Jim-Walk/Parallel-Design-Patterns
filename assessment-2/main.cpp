@@ -42,7 +42,7 @@ int main(){
 
 
 static void worker_code(){
-    int rank;
+  /*  int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     Actor a = Actor(rank);
     a.start_up();
@@ -55,5 +55,25 @@ static void worker_code(){
     } else if (a.get_type() == Actor::actor_type::CLOCK){
         Clock c = Clock(a);
         c.run();
+    }
+    */
+    int workerStatus = 1;
+    while (workerStatus) {
+        int rank;
+        MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+        Actor a = Actor(rank);
+        a.start_up();
+        if (a.get_type() == Actor::actor_type::GRID){
+           Grid_cell gc = Grid_cell(a); 
+           gc.run();
+        } else if (a.get_type() == Actor::actor_type::SQ || a.get_type() == Actor::actor_type::INFSQ){
+            Squirrel sq = Squirrel(a);
+            sq.run();
+        } else if (a.get_type() == Actor::actor_type::CLOCK){
+            Clock c = Clock(a);
+            c.run();
+        }
+        workerStatus = workerSleep();
+        //printf("%d just woke with status %d..\n", rank, workerStatus);
     }
 }
