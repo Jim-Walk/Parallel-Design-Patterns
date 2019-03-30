@@ -9,10 +9,7 @@ class Master : public Actor {
         }
 
         bool is_active();
-        void set_up();
-        void set_total_squirrels(int squirrels){
-            total_squirrels = squirrels;
-        }
+        void set_up_sim();
         int create_sq(float pos_x,float pos_y);
         void run();
 
@@ -20,9 +17,9 @@ class Master : public Actor {
     private: 
         // Variables
         const int num_grid_cells = 16; 
-        int live_squirrels = 4;
-        int total_squirrels;
-        int initial_inf_sq = 2;
+        int live_squirrels = 10;
+        int total_squirrels = 200;
+        int initial_inf_sq = 7;
         std::vector<int> squirrel_ids;
         std::vector<int> inf_squirrel_ids;
         std::vector<int> dead_squirrel_ids;

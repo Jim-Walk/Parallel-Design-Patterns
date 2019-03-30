@@ -25,7 +25,7 @@ class Actor{
     protected:
         int id;
         bool active;
-        enum MSG {STOP=0, START=1, STEP=3, INFSTEP=4};
+        enum MSG {STOP=0, START=1, STEP=3, INFSTEP=4, TICK=5};
         void *buf;
         actor_type act_type;
 };

@@ -7,11 +7,8 @@
 #include "../include/squirrel.hpp"
 #include "../lib/ran2.h"
 
-void Squirrel::initialise(){
-}
 
 void Squirrel::run(){
-    printf("%d: start Squirrel\n", id);
     while (active){
         if (get_alive()){
             move();
@@ -29,8 +26,9 @@ void Squirrel::move(){
     pos_y = temp_y;
 
     int current_cell = getCellFromPosition(pos_x, pos_y) +1;
-    // get info from current_cell
-    update_inf_history(current_cell);
+    // step into from current_cell
+    step(current_cell);
+    update_inf_history(cell_inf);
     float avg_inf = std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
     if (!get_infected() ){
         if (willCatchDisease(avg_inf, &state)){
@@ -44,43 +42,31 @@ void Squirrel::move(){
         } 
     }
 
-    update_pop_history(current_cell);
+    update_pop_history(cell_pop);
     float avg_pop = std::accumulate(pop_history.begin(), pop_history.end(), 0.0) / pop_history.size();
     if (willGiveBirth(avg_pop, &state)){
         give_birth(current_cell);
     }
 }
 
-//TODO Consider merging these functions so we only need
-//     to send and recieve one message each step
-float Squirrel::get_pop(int cell){
-    float pop = 0;
-    if (cell == 0){
-        printf("%d wtf why am I stepping on 0\n", id);
-    }
-    send_msg(cell, MSG::STEP);
-    data_recv(&pop);
-    return pop;
-}
-
-float Squirrel::get_inf_level(int cell){
-    float inf = 0;
-
-    if (!get_infected()){
+void Squirrel::step(int cell){
+    if (get_infected()){
         send_msg(cell, MSG::STEP);
     } else {
         send_msg(cell, MSG::INFSTEP);
     }
-    data_recv(&inf);
-    return inf;
+    data_recv(&cell_pop);
+    data_recv(&cell_inf);
 }
+
+//TODO Consider merging these functions so we only need
+//     to send and recieve one message each step
 
 void Squirrel::give_birth(int cell){
     send_msg(0, MSG::START);
 }
 
-void Squirrel::update_pop_history(int cell){
-    float new_population = get_pop(cell);
+void Squirrel::update_pop_history(float new_population){
     if (pop_history.size() > 49){
         pop_history.pop_back();
         pop_history.push_front(new_population);
@@ -89,8 +75,7 @@ void Squirrel::update_pop_history(int cell){
     }
 }
 
-void Squirrel::update_inf_history(int cell){
-    float new_inf = get_inf_level(cell);
+void Squirrel::update_inf_history(float new_inf){
     if (inf_history.size() > 49){
         inf_history.pop_back();
         inf_history.push_front(new_inf);
@@ -114,7 +99,6 @@ void Squirrel::set_infected(bool inf){
 // tell master I have died, and die
 void Squirrel::die(){
     send_msg(0, MSG::STOP);
-    printf("%d: I died\n", id);
     set_alive(false);
 }
 
@@ -131,6 +115,3 @@ void Squirrel::set_alive(bool live){
     }
 }
 
-void Squirrel::check_alive(){
-
-}      

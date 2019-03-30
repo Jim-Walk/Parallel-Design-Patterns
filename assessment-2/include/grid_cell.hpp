@@ -11,6 +11,7 @@ class Grid_cell : Actor {
 
             inf_count = 0;
             pop_count = 0;
+            month_update = false;
         }
         void run();
     private:
@@ -25,8 +26,7 @@ class Grid_cell : Actor {
 
         // functions
         void check_for_month();
-        void exchange_pop();
-        void exchange_inf();
+        void exchange_pop_and_inf();
 };
 
 #endif

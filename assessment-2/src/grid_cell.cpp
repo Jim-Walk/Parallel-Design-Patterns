@@ -15,8 +15,7 @@ void Grid_cell::run(){
             month_update = false;
         }
         check_for_month();
-        exchange_pop();
-        exchange_inf();
+        exchange_pop_and_inf();
         check_active();
     }
     printf("gc %d: done, pop %f, inf %f\n", id, avg_pop, avg_inf);
@@ -27,26 +26,23 @@ void Grid_cell::check_for_month(){
     month_update = false;
 }
 
-void Grid_cell::exchange_pop(){
+void Grid_cell::exchange_pop_and_inf(){
 
     bool recvd;
     int rank, msg  = -1;
     std::tie(recvd, rank, msg) = msg_recv();
     if (recvd){
-        avg_pop++;
-        send_data(rank, avg_pop);
-    }
-}
-void Grid_cell::exchange_inf(){
-    bool recvd;
-    int rank, msg  = -1;
-    std::tie(recvd, rank, msg) = msg_recv();
-    if (recvd){
-        if (msg == MSG::INFSTEP){
-            if (avg_inf < std::numeric_limits<float>::max())
-                avg_inf++;
+        if (msg == MSG::STEP){
+            pop_count++;
+            send_data(rank, avg_pop);
+            send_data(rank, avg_inf);
+        } else if (msg == MSG::INFSTEP){
+            pop_count++;
+            inf_count++;
+            send_data(rank, avg_pop);
+            send_data(rank, avg_inf);
+        } else if(msg == MSG::TICK){
+            month_update=true;
         }
-        send_data(rank, avg_inf);
     }
 }
-

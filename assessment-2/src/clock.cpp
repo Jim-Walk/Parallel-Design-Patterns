@@ -13,15 +13,20 @@ int Clock::get_months(){
 
 void Clock::run(){
 
-    int i = 0;
+    int tick = 0;
     while (active){
-        i++;
+        tick++;
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        if (i >= months){
+        if (tick >= months){
             active = false;
         }
+        printf("Clock %d: Send tick %d \n", id, tick);
+        for (int gc = 1; gc <= 16; gc++){
+            send_msg(gc, MSG::TICK);
+        }
+        check_active();
     }
+    printf("%d: clock shutdown after %d months\n", id, tick);
     shutdownPool();
-    printf("%d: clock shutdown pool\n", id);
     
 }

@@ -24,10 +24,8 @@ int main(){
         
         int myRank;
         MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
-        int total_squirrels = 4;
         printf("master rank %d \n", myRank); 
         Master master = Master(myRank);
-        master.set_total_squirrels(total_squirrels);
         // Start grid cell and squirell processes
         
         master.run();
