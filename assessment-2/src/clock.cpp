@@ -20,10 +20,13 @@ void Clock::run(){
         if (tick >= months){
             active = false;
         }
-        printf("Clock %d: Send tick %d \n", id, tick);
-        for (int gc = 1; gc <= 16; gc++){
-            send_msg(gc, MSG::TICK);
+        //printf("sending to id:");
+        // Send tick to master and all grid cells
+        for (int rank = 0; rank <= 16; rank++){
+          //  printf(" %d", rank);
+            send_msg(rank, MSG::TICK);
         }
+        //printf("\n");
         check_active();
     }
     printf("%d: clock shutdown after %d months\n", id, tick);

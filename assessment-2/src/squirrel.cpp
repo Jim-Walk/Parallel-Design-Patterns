@@ -7,6 +7,14 @@
 #include "../include/squirrel.hpp"
 #include "../lib/ran2.h"
 
+Squirrel::Squirrel(Actor const& a) : Actor(a){
+            state = -1-id; 
+            active = true;
+            pos_x = 1;
+            pos_y = 1;
+            initialiseRNG(&state);
+            set_co_ords();
+}
 
 void Squirrel::run(){
     while (active){
@@ -44,9 +52,9 @@ void Squirrel::move(){
 
     update_pop_history(cell_pop);
     float avg_pop = std::accumulate(pop_history.begin(), pop_history.end(), 0.0) / pop_history.size();
-    if (willGiveBirth(avg_pop, &state)){
-        give_birth(current_cell);
-    }
+    //if (willGiveBirth(avg_pop, &state)){
+        give_birth();
+    //}
 }
 
 void Squirrel::step(int cell){
@@ -59,11 +67,12 @@ void Squirrel::step(int cell){
     data_recv(&cell_inf);
 }
 
-//TODO Consider merging these functions so we only need
-//     to send and recieve one message each step
 
-void Squirrel::give_birth(int cell){
+void Squirrel::give_birth(){
     send_msg(0, MSG::START);
+    float loc_vec[2] = {pos_x, pos_y};
+    MPI_Bsend(loc_vec, 2, MPI_FLOAT, 0,0, MPI_COMM_WORLD);
+    //printf("%d: I gave birth at %f, %f\n", id, pos_x, pos_y);
 }
 
 void Squirrel::update_pop_history(float new_population){
@@ -115,3 +124,10 @@ void Squirrel::set_alive(bool live){
     }
 }
 
+void Squirrel::set_co_ords(){
+    float loc_vec[2];
+    MPI_Status stat;
+    MPI_Recv(loc_vec, 2, MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &stat);
+    pos_x = loc_vec[0];
+    pos_y = loc_vec[1];
+}

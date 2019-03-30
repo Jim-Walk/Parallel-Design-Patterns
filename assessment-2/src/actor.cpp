@@ -6,8 +6,8 @@
 
 Actor::Actor(int id){
     this->id = id;
-    buf = malloc( sizeof(int)*40);
-    MPI_Buffer_attach(&buf, 40);
+    buf = malloc( sizeof(int)*200);
+    MPI_Buffer_attach(&buf, 200);
 }
 
 void Actor::send_msg(int dest, int msg){

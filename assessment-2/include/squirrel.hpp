@@ -7,20 +7,9 @@
 
 class Squirrel : public Actor {
     public:
-        Squirrel(float x, float y, Actor const& a) : Squirrel(a){
-            pos_x = x;
-            pos_y = y;
-        }
 
+        Squirrel(Actor const& a);
 
-        Squirrel(Actor const& a) : Actor(a){
-            state = -1-id; 
-            printf("my state is %ld\n", state);
-            active = true;
-            pos_x = 1;
-            pos_y = 1;
-            initialiseRNG(&state);
-        }
         void run();
         void move();    
         void check_alive();
@@ -35,7 +24,7 @@ class Squirrel : public Actor {
        std::deque<float> pop_history;
        std::deque<float> inf_history;
 
-       void give_birth(int cell);
+       void give_birth();
        void die();
 
        void update_pop_history(float new_inf);
@@ -47,6 +36,8 @@ class Squirrel : public Actor {
        bool get_alive();
        void set_alive(bool live);
 
+
+       void set_co_ords();
        void step(int cell);
 };
 
