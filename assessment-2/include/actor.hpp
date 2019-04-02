@@ -9,7 +9,8 @@ class Actor{
             SQ=1, 
             INFSQ=2,
             DEADSQ=3,
-            CLOCK=4
+            CLOCK=4,
+            CONTROL=5
         };
         Actor(int id);
         void start_up();
@@ -21,6 +22,7 @@ class Actor{
         void send_data(int dest, float data);
         std::tuple<bool, int, int> msg_recv();
         bool data_recv(float *data);
+        int parent;
         
     protected:
         int id;

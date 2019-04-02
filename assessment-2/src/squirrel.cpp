@@ -69,9 +69,9 @@ void Squirrel::step(int cell){
 
 
 void Squirrel::give_birth(){
-    send_msg(0, MSG::START);
+    send_msg(17, MSG::START);
     float loc_vec[2] = {pos_x, pos_y};
-    MPI_Bsend(loc_vec, 2, MPI_FLOAT, 0,0, MPI_COMM_WORLD);
+    MPI_Bsend(loc_vec, 2, MPI_FLOAT, 17,0, MPI_COMM_WORLD);
     //printf("%d: I gave birth at %f, %f\n", id, pos_x, pos_y);
 }
 
@@ -107,7 +107,7 @@ void Squirrel::set_infected(bool inf){
 
 // tell master I have died, and die
 void Squirrel::die(){
-    send_msg(0, MSG::STOP);
+    send_msg(17, MSG::STOP);
     set_alive(false);
 }
 
@@ -127,7 +127,7 @@ void Squirrel::set_alive(bool live){
 void Squirrel::set_co_ords(){
     float loc_vec[2];
     MPI_Status stat;
-    MPI_Recv(loc_vec, 2, MPI_FLOAT, 0, 0, MPI_COMM_WORLD, &stat);
+    MPI_Recv(loc_vec, 2, MPI_FLOAT, parent, 0, MPI_COMM_WORLD, &stat);
     pos_x = loc_vec[0];
     pos_y = loc_vec[1];
 }

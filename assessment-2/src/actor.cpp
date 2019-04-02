@@ -27,7 +27,8 @@ Actor::actor_type Actor::get_type(){
 
 void Actor::start_up(){
     MPI_Status status;
-    MPI_Recv(&act_type, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+    parent = getCommandData();
+    MPI_Recv(&act_type, 1, MPI_INT, parent, 0, MPI_COMM_WORLD, &status);
 }
 
 void Actor::run(){

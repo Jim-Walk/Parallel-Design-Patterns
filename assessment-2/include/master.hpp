@@ -18,12 +18,8 @@ class Master : public Actor {
         // Variables
         const int num_grid_cells = 16; 
         int live_squirrels = 15;
-        int total_squirrels = 200;
+        const int total_squirrels = 200;
         int initial_inf_sq = 9;
-        std::vector<int> squirrel_ids;
-        std::vector<int> inf_squirrel_ids;
-        std::vector<int> dead_squirrel_ids;
-        std::vector<int> grid_ids;
 
         // Functions
         void manage_squirrels();

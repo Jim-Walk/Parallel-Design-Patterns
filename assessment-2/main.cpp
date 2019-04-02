@@ -6,6 +6,7 @@
 #include "./include/grid_cell.hpp"
 #include "./include/squirrel.hpp"
 #include "./include/clock.hpp"
+#include "./include/controller.hpp"
 #include "./lib/pool.h"
 
 static void worker_code();
@@ -21,7 +22,6 @@ int main(){
     if (statusCode == 1){
         worker_code();
     } else if (statusCode == 2){
-        
         int myRank;
         MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
         Master master = Master(myRank);
@@ -50,6 +50,9 @@ static void worker_code(){
         } else if (a.get_type() == Actor::actor_type::CLOCK){
             Clock c = Clock(a);
             c.run();
+        } else if(a.get_type() == Actor::actor_type::CONTROL){
+            Controller control = Controller(a);
+            control.run(); 
         }
         workerStatus = workerSleep();
     }
