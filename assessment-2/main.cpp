@@ -37,6 +37,7 @@ int main(int argc, char* argv[]){
         Master master = Master(myRank);
         master.set_initial_vals(tot_sq, live_sq, inf_sq); 
         master.run();
+        printf("master done \n");
     }
 
     processPoolFinalise();
@@ -58,6 +59,7 @@ static void worker_code(int tot_sq, int live_sq, int inf_sq, int months){
         } else if (a.get_type() == Actor::actor_type::SQ || a.get_type() == Actor::actor_type::INFSQ){
             Squirrel sq = Squirrel(a);
             sq.run();
+            printf("%d sq done\n", rank);
         } else if (a.get_type() == Actor::actor_type::CLOCK){
             Clock c = Clock(a);
             c.set_months(months);

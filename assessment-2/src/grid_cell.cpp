@@ -30,7 +30,7 @@ void Grid_cell::run(){
             pop_count = 0; inf_count = 0;
             month_update = false;
             
-            printf("gc %d: month: %d avg_pop: %f avg_inf: %f \n", id,months, avg_pop, avg_inf);
+ //           printf("gc %d: month: %d avg_pop: %f avg_inf: %f \n", id,months, avg_pop, avg_inf);
         }
         exchange_pop_and_inf();
         check_active();

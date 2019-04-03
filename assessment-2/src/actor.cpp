@@ -63,12 +63,17 @@ std::tuple<bool, int, int> Actor::msg_recv(){
 
 bool Actor::data_recv(int rank, float *data){
     MPI_Status stat;
-    int pop_flag = 0;
- //   MPI_Iprobe(rank, 0, MPI_COMM_WORLD,&pop_flag, &stat);
- //   if (pop_flag){ 
+    int msg_flag = 0;
+    while (msg_flag != 1){
+        MPI_Iprobe(rank, 0, MPI_COMM_WORLD,&msg_flag, &stat);
+        if (shouldWorkerStop()){
+            printf("%d finished\n", id);
+            return false;
+        }
+    }
+    if (msg_flag){ 
        MPI_Recv(data, 1, MPI_FLOAT, rank, 0, MPI_COMM_WORLD, &stat);
-//       printf("%d: got pop from %d\n",id,rank);
- //   }
-    return pop_flag == 1;
+    }
+    return msg_flag == 1;
 }
 

@@ -36,7 +36,8 @@ void Clock::run(){
         printf("tick %d\n", tick);
         check_active();
     }
-    shutdownPool();
+    if (tick >= months)
+        shutdownPool();
     active = false;
     printf("%d: clock shutdown after %d months\n", id, tick);
 }
