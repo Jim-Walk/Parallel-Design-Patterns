@@ -41,7 +41,7 @@ void Squirrel::move(){
     if (!get_infected() ){
         if (willCatchDisease(avg_inf, &state)){
             set_infected(true);
-            printf("%d: is infected!\n", id);
+            send_msg(17, MSG::INFSTEP);
         }
     } else {
         if (willDie(&state)){
@@ -49,22 +49,22 @@ void Squirrel::move(){
             return;
         } 
     }
-
     update_pop_history(cell_pop);
     float avg_pop = std::accumulate(pop_history.begin(), pop_history.end(), 0.0) / pop_history.size();
-    //if (willGiveBirth(avg_pop, &state)){
+    if (willGiveBirth(avg_pop, &state)){
         give_birth();
-    //}
+    }
 }
 
 void Squirrel::step(int cell){
-    if (get_infected()){
+    if (!get_infected()){
         send_msg(cell, MSG::STEP);
     } else {
         send_msg(cell, MSG::INFSTEP);
     }
-    data_recv(&cell_pop);
-    data_recv(&cell_inf);
+    data_recv(cell, &cell_pop);
+    
+    data_recv(cell, &cell_inf);
 }
 
 
@@ -72,7 +72,6 @@ void Squirrel::give_birth(){
     send_msg(17, MSG::START);
     float loc_vec[2] = {pos_x, pos_y};
     MPI_Bsend(loc_vec, 2, MPI_FLOAT, 17,0, MPI_COMM_WORLD);
-    //printf("%d: I gave birth at %f, %f\n", id, pos_x, pos_y);
 }
 
 void Squirrel::update_pop_history(float new_population){
@@ -105,7 +104,7 @@ void Squirrel::set_infected(bool inf){
     }
 }
 
-// tell master I have died, and die
+// tell controller I have died, and die
 void Squirrel::die(){
     send_msg(17, MSG::STOP);
     set_alive(false);

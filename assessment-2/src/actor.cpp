@@ -6,12 +6,15 @@
 
 Actor::Actor(int id){
     this->id = id;
-    buf = malloc( sizeof(int)*200);
-    MPI_Buffer_attach(&buf, 200);
+    buf = malloc( (sizeof(int)+MPI_BSEND_OVERHEAD)*200);
+    MPI_Buffer_attach(&buf, (sizeof(int)+MPI_BSEND_OVERHEAD)*200);
 }
 
 void Actor::send_msg(int dest, int msg){
-    MPI_Bsend(&msg, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
+    int err = MPI_Bsend(&msg, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
+    if (id==20 && err != 0){
+        printf("%d: error sending, %d\n", id, err);
+    }
 }
 
 void Actor::send_data(int dest, float data){
@@ -37,6 +40,8 @@ void Actor::run(){
 
 void Actor::check_active(){
     if (shouldWorkerStop()){
+        if (id == 18)
+            printf("clock stopped\n");
         active = false;
     }
 }
@@ -56,14 +61,14 @@ std::tuple<bool, int, int> Actor::msg_recv(){
     return std::make_tuple(msg_flag == 1, rank, msg);
 }
 
-bool Actor::data_recv(float *data){
+bool Actor::data_recv(int rank, float *data){
     MPI_Status stat;
     int pop_flag = 0;
-    MPI_Iprobe(MPI_ANY_SOURCE, 0, MPI_COMM_WORLD,&pop_flag, &stat);
-    if (pop_flag){
-        MPI_Recv(&data, 1, MPI_FLOAT, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &stat);
-        //printf("%d: got pop from %d\n",id,cell);
-    }
+ //   MPI_Iprobe(rank, 0, MPI_COMM_WORLD,&pop_flag, &stat);
+ //   if (pop_flag){ 
+       MPI_Recv(data, 1, MPI_FLOAT, rank, 0, MPI_COMM_WORLD, &stat);
+//       printf("%d: got pop from %d\n",id,rank);
+ //   }
     return pop_flag == 1;
 }
 

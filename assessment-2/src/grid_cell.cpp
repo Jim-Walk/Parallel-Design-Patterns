@@ -9,8 +9,10 @@
 void Grid_cell::run(){
     std::deque<int> recent_pops;
     std::deque<int> recent_infs;
+    int months = 0;
     while (active){
         if (month_update){
+            months++;
 
             if (recent_pops.size() > 2){
                 recent_pops.pop_back();
@@ -27,11 +29,13 @@ void Grid_cell::run(){
 
             pop_count = 0; inf_count = 0;
             month_update = false;
+            
+            printf("gc %d: month: %d avg_pop: %f avg_inf: %f \n", id,months, avg_pop, avg_inf);
         }
         exchange_pop_and_inf();
         check_active();
     }
-    printf("gc %d: done, pop %f, inf %f\n", id, avg_pop, avg_inf);
+    printf("gc %d: DONE: pop: %f, inf: %f\n", id, avg_pop, avg_inf);
 }
 
 void Grid_cell::exchange_pop_and_inf(){

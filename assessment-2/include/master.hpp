@@ -5,24 +5,30 @@
 
 class Master : public Actor {
     public:
+        // Contructors
         Master(int id) : Actor(id){
         }
+        Master(Actor const& a) : Actor(a){
+        }
 
-        bool is_active();
-        void set_up_sim();
-        int create_sq(float pos_x,float pos_y);
+        void set_initial_vals(int tot_sq, int live_sq, int inf_sq){
+            total_squirrels = tot_sq;
+            live_squirrels = live_sq;
+            inf_count = inf_sq;
+        }
         void run();
 
+    protected:
+        int live_squirrels;
+        int total_squirrels;
+        int inf_count;
 
     private: 
         // Variables
-        const int num_grid_cells = 16; 
-        int live_squirrels = 15;
-        const int total_squirrels = 200;
-        int initial_inf_sq = 9;
+        int num_grid_cells = 16; 
 
         // Functions
-        void manage_squirrels();
+        void set_up_sim();
 };
 
 #endif

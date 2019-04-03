@@ -21,7 +21,7 @@ class Actor{
         void send_msg(int dest, int msg);
         void send_data(int dest, float data);
         std::tuple<bool, int, int> msg_recv();
-        bool data_recv(float *data);
+        bool data_recv(int src, float *data);
         int parent;
         
     protected:

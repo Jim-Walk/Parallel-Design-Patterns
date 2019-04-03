@@ -6,7 +6,7 @@ class Clock : public Actor {
     public:
         Clock(Actor const& a) : Actor(a){
             active = true;
-            months = 24;
+            months = 12;
         }
 
         void set_months(int months);

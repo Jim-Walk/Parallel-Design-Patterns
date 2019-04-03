@@ -16,20 +16,27 @@ void Clock::run(){
     int tick = 0;
     while (active){
         tick++;
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        if (tick >= months){
-            active = false;
+        // Set up timiing
+        auto tstart = std::chrono::system_clock::now();
+        auto tend = std::chrono::system_clock::now();
+        std::chrono::duration<double> diff = tend - tstart;
+        // check active for 400 milliseconds
+        while (diff.count() < 0.400){
+            tend = std::chrono::system_clock::now();
+            diff = tend - tstart;
+            check_active();
         }
-        //printf("sending to id:");
-        // Send tick to master and all grid cells
-        for (int rank = 0; rank <= 16; rank++){
-          //  printf(" %d", rank);
+        if (!active || tick >= months){
+            break;
+        }
+        // Send tick to all grid cells and controller
+        for (int rank = 1; rank <= 17; rank++){
             send_msg(rank, MSG::TICK);
         }
-        //printf("\n");
+        printf("tick %d\n", tick);
         check_active();
     }
-    printf("%d: clock shutdown after %d months\n", id, tick);
     shutdownPool();
-    
+    active = false;
+    printf("%d: clock shutdown after %d months\n", id, tick);
 }
