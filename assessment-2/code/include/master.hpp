@@ -1,7 +1,6 @@
 #ifndef MASTER_HPP
 #define MASTER_HPP
 #include "../include/actor.hpp"
-#include <vector>
 
 class Master : public Actor {
     public:

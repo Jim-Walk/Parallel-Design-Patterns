@@ -11,10 +11,7 @@ Actor::Actor(int id){
 }
 
 void Actor::send_msg(int dest, int msg){
-    int err = MPI_Bsend(&msg, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
-    if (id==20 && err != 0){
-        printf("%d: error sending, %d\n", id, err);
-    }
+    MPI_Bsend(&msg, 1, MPI_INT, dest, 0, MPI_COMM_WORLD);
 }
 
 void Actor::send_data(int dest, float data){
@@ -40,8 +37,8 @@ void Actor::run(){
 
 void Actor::check_active(){
     if (shouldWorkerStop()){
-        if (id == 18)
-            printf("clock stopped\n");
+        if (id == 19)
+            printf("sq stopped\n");
         active = false;
     }
 }
@@ -67,7 +64,7 @@ bool Actor::data_recv(int rank, float *data){
     while (msg_flag != 1){
         MPI_Iprobe(rank, 0, MPI_COMM_WORLD,&msg_flag, &stat);
         if (shouldWorkerStop()){
-            printf("%d finished\n", id);
+            active = false;
             return false;
         }
     }

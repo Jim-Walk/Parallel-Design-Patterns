@@ -10,8 +10,6 @@
 Squirrel::Squirrel(Actor const& a) : Actor(a){
             state = -1-id; 
             active = true;
-            pos_x = 1;
-            pos_y = 1;
             initialiseRNG(&state);
             set_co_ords();
 }
@@ -34,40 +32,58 @@ void Squirrel::move(){
     pos_y = temp_y;
 
     int current_cell = getCellFromPosition(pos_x, pos_y) +1;
-    // step into from current_cell
-    step(current_cell);
-    update_inf_history(cell_inf);
-    float avg_inf = std::accumulate(inf_history.begin(), inf_history.end(), 0.0) / inf_history.size();
-    if (!get_infected() ){
-        if (willCatchDisease(avg_inf, &state)){
-            set_infected(true);
-            send_msg(17, MSG::INFSTEP);
+    // If I can step into current_cell
+    if (step(current_cell)){
+        // Update my infection history
+        // Get current infection level
+        update_inf_history(cell_inf);
+        float avg_inf = std::accumulate(
+                            inf_history.begin(),
+                            inf_history.end(),
+                            0.0
+                            ) / inf_history.size();
+        // If I am not infected, check if I will catch the disease
+        // and inform controller if I do
+        if (!get_infected() ){
+            if (willCatchDisease(avg_inf, &state)){
+                set_infected(true);
+                send_msg(17, MSG::INFSTEP);
+            }
+        } // If I am infected, check if I will die. If I die, exit
+        else { // the function
+            if (willDie(&state)){
+                die();
+                return;
+            } 
         }
-    } else {
-        if (willDie(&state)){
-            die();
-            return;
-        } 
-    }
-    update_pop_history(cell_pop);
-    float avg_pop = std::accumulate(pop_history.begin(), pop_history.end(), 0.0) / pop_history.size();
-    if (willGiveBirth(avg_pop, &state)){
-        give_birth();
+        // Update my population history
+        // Get current population level
+        update_pop_history(cell_pop);
+        float avg_pop = std::accumulate(
+                            pop_history.begin(), 
+                            pop_history.end(), 
+                            0.0
+                            ) / pop_history.size();
+        if (willGiveBirth(avg_pop, &state)){
+            give_birth();
+        }
     }
 }
 
-void Squirrel::step(int cell){
+// Steps into cell, messages it with an infected or uninfected step
+// Returns boolean value dependant on it recieving data from 
+// target cell
+bool Squirrel::step(int cell){
     if (!get_infected()){
         send_msg(cell, MSG::STEP);
     } else {
         send_msg(cell, MSG::INFSTEP);
     }
-    data_recv(cell, &cell_pop);
-    
-    data_recv(cell, &cell_inf);
+    return data_recv(cell, &cell_pop) &&  data_recv(cell, &cell_inf);
 }
 
-
+// Tells the controller that it is giving birth at a certain location
+// TODO Fit this Bsend into actor send framework
 void Squirrel::give_birth(){
     send_msg(17, MSG::START);
     float loc_vec[2] = {pos_x, pos_y};
@@ -104,7 +120,7 @@ void Squirrel::set_infected(bool inf){
     }
 }
 
-// tell controller I have died, and die
+// Tell controller I have died, and die
 void Squirrel::die(){
     send_msg(17, MSG::STOP);
     set_alive(false);
@@ -122,7 +138,8 @@ void Squirrel::set_alive(bool live){
         act_type = actor_type::DEADSQ;
     }
 }
-
+// Blocks untill squirrel recieves its birth location
+// Squirrels must have an assigned location before they can move
 void Squirrel::set_co_ords(){
     float loc_vec[2];
     MPI_Status stat;

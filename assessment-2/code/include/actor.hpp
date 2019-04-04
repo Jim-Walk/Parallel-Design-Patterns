@@ -22,7 +22,6 @@ class Actor{
         void send_data(int dest, float data);
         std::tuple<bool, int, int> msg_recv();
         bool data_recv(int src, float *data);
-        int parent;
         
     protected:
         int id;
@@ -30,6 +29,7 @@ class Actor{
         enum MSG {STOP=0, START=1, STEP=3, INFSTEP=4, TICK=5};
         void *buf;
         actor_type act_type;
+        int parent;
 };
 
 #endif

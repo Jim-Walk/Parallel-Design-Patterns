@@ -20,14 +20,15 @@ void Clock::run(){
         auto tstart = std::chrono::system_clock::now();
         auto tend = std::chrono::system_clock::now();
         std::chrono::duration<double> diff = tend - tstart;
-        // check active for 400 milliseconds
-        while (diff.count() < 0.400){
+        // check active for 800 milliseconds
+        while (diff.count() < 0.50){
             tend = std::chrono::system_clock::now();
             diff = tend - tstart;
             check_active();
         }
         if (!active || tick >= months){
             break;
+            active = false;
         }
         // Send tick to all grid cells and controller
         for (int rank = 1; rank <= 17; rank++){
@@ -38,6 +39,5 @@ void Clock::run(){
     }
     if (tick >= months)
         shutdownPool();
-    active = false;
     printf("%d: clock shutdown after %d months\n", id, tick);
 }

@@ -12,6 +12,5 @@ class Controller : public Master {
 
     private:
         void manage_squirrels();
-        void print_info();
 };
 #endif

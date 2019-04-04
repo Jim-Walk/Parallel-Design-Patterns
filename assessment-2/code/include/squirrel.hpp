@@ -11,8 +11,6 @@ class Squirrel : public Actor {
         Squirrel(Actor const& a);
 
         void run();
-        void move();    
-        void check_alive();
     private:
        float pos_x, pos_y; 
        float temp_x, temp_y; 
@@ -24,6 +22,7 @@ class Squirrel : public Actor {
        std::deque<float> pop_history;
        std::deque<float> inf_history;
 
+       void move();    
        void give_birth();
        void die();
 
@@ -38,7 +37,7 @@ class Squirrel : public Actor {
 
 
        void set_co_ords();
-       void step(int cell);
+       bool step(int cell);
 };
 
 #endif

@@ -17,6 +17,7 @@ int main(int argc, char* argv[]){
     int myRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
     int tot_sq, live_sq, inf_sq, months;
+    // Set default settings, or get them from the command line
     if (argc != 5){
         tot_sq = 200;
         live_sq = 15;
@@ -52,6 +53,7 @@ static void worker_code(int tot_sq, int live_sq, int inf_sq, int months){
         int rank;
         MPI_Comm_rank(MPI_COMM_WORLD, &rank);
         Actor a = Actor(rank);
+        // Recv my type from master
         a.start_up();
         if (a.get_type() == Actor::actor_type::GRID){
            Grid_cell gc = Grid_cell(a); 
@@ -59,7 +61,6 @@ static void worker_code(int tot_sq, int live_sq, int inf_sq, int months){
         } else if (a.get_type() == Actor::actor_type::SQ || a.get_type() == Actor::actor_type::INFSQ){
             Squirrel sq = Squirrel(a);
             sq.run();
-            printf("%d sq done\n", rank);
         } else if (a.get_type() == Actor::actor_type::CLOCK){
             Clock c = Clock(a);
             c.set_months(months);
@@ -69,6 +70,7 @@ static void worker_code(int tot_sq, int live_sq, int inf_sq, int months){
             control.set_initial_vals(tot_sq, live_sq, inf_sq);
             control.run(); 
         }
+        // If I'm a dead squirrel, I'll sleep until I'm needed
         workerStatus = workerSleep();
     }
 }
