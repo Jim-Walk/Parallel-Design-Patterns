@@ -31,7 +31,7 @@ void Grid_cell::run(){
             pop_count = 0; inf_count = 0;
             month_update = false;
             
- //           printf("gc %d: month: %d population_influx: %f infection_level: %f \n", id,months, population_influx, infection_level);
+            printf("gc %d: month: %d population_influx: %f infection_level: %f \n", id,months, population_influx, infection_level);
         }
         communicate();
         check_active();

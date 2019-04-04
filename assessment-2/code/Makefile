@@ -1,4 +1,4 @@
-CXX := mpic++
+CXX := mpicxx
 CXXFLAGS := -Wall -O3 -Wextra -std=c++11 -g #-I/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi -I/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent -I/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent/include -I/usr/lib/x86_64-linux-gnu/openmpi/include -pthread -L/usr//lib -L/usr/lib/x86_64-linux-gnu/openmpi/lib -lmpi_cxx -lmpi
 # DIRECTORIES
 BASE_DIR := .

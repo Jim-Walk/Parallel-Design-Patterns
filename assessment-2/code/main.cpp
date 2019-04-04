@@ -20,8 +20,8 @@ int main(int argc, char* argv[]){
     // Set default settings, or get them from the command line
     if (argc != 5){
         tot_sq = 200;
-        live_sq = 15;
-        inf_sq = 5;
+        live_sq = 34;
+        inf_sq = 4;
         months = 24;
         if (myRank == 0)
             printf("Set default params with mpirun -nN ./bin/main $total_squirrels $live_squirrels, $infected_squirrels, $number_of_months\n");

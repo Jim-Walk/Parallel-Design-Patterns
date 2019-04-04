@@ -23,8 +23,6 @@ void Controller::manage_squirrels(){
     bool recvd;
     int rank, msg = -1;
     float loc_vec[2];
-    // if a squirrel has died, add its id to the dead
-    // squirrels pool
     
     std::tie(recvd, rank, msg) = msg_recv();
     if (recvd){
@@ -48,7 +46,8 @@ void Controller::manage_squirrels(){
             //std::cout << id << ": 🐿️   🤢  ID: " << rank <<std::endl;
         }
         else if (msg == MSG::TICK){
-            printf("C%d: live_squirrels: %d infected: %d \n", id, live_squirrels, inf_count);
+            month++;
+            printf("C%d: month: %d live_squirrels: %d infected: %d \n", id, month, live_squirrels, inf_count);
         }
     }
 }
