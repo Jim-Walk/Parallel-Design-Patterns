@@ -40,7 +40,7 @@ void squirrelStep(float x, float y, float* x_new, float* y_new, long * state){
  * which is modified. You can enclose this function call in an if statement if that is useful.
  */
 int willGiveBirth(float avg_pop, long * state) {
-    float probability= 1.0; // Decrease this to make more likely, increase less likely
+    float probability= 100.0; // Decrease this to make more likely, increase less likely
     float tmp=avg_pop/probability;
 
     return (ran2(state)<(atan(tmp*tmp)/(4*tmp)));
