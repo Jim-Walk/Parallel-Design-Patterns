@@ -3,7 +3,6 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{enumitem}
-\usepackage{listings}
 \pagestyle{fancy}
 \title{Parallel Design Patterns II}
 \author{B138813}
@@ -57,18 +56,11 @@ We have made use of a clock actor to send messages to every grid cell each month
 If the controller recieves a message from the clock it prints out the current number of live squirrels and the number of dead squirrels.
 
 \section{Correctness}\label{sec:cor}
-Although our we embrace the chaotic nature of the actor pattern and the model we are simulating, we can still demonstrate the correctness of our implementation. For example, if there are no infected squirrels at the start of the simulation, then the number of squirrels will reach 200 and force the simulation to end. Simililarly, if we set the number of infected squirrels to be equal to the initial number of squirrels, the squirrels will all die, causing the simulation to end early.
-
-Our program will routinely give similar output for the same initial parameters. For example, we found that with suggested parameters the simulation stays in a steady state, begining with 34 live squirrels and ending with 34 $\pm$ 2. Although the simulation starts with 4 infected squirrels, we found that the number of infected squirrels in the simulation printed by the controller actor each month rapidly approached zero, and would only sometimes increase to one. We believe this is because it takes a squirrel less than a month to die after being infected.
-
-We include a sample output in Appendix~\ref{sec:sample}, which we have graphed into Figure
-
+Although our we embrace the chaotic nature of the actor pattern and the model we are simulating, we can still demonstrate the correctness of our implementation. For example, if there are no infected squirrels at the start of the simulation, then the number of squirrels will reach 200 and force the simulation to end. Simililarly, if we set the number of infected squirrels to be 
 \subsection{Issues}
 Our solution is not portable and is not production ready. When there are a high number of live squirrels, the controller actor is too busy to recieve clock ticks.
 
 \section{Further Work}\label{sec:fur}
-We would cheifly further generalise data recieve or make a blocking data recievev for location vector.
-
-\include{appendix}
+Further generalise data recv or make a blocking data recv for location vector.
 
 \end{document}
