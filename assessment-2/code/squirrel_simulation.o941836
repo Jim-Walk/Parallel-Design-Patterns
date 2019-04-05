@@ -1,0 +1,435 @@
+Set default params with mpirun -nN ./bin/main $total_squirrels $live_squirrels, $infected_squirrels, $number_of_months
+Master 0: Creating sim with 34 squirrels, of which 4 are infected
+gc 8: month: 1 population_influx: 18.000000 infection_level: 2.000000 
+gc 9: month: 1 population_influx: 12.000000 infection_level: 0.000000 
+gc 10: month: 1 population_influx: 12.000000 infection_level: 1.000000 
+gc 11: month: 1 population_influx: 16.000000 infection_level: 0.000000 
+gc 13: month: 1 population_influx: 14.000000 infection_level: 1.000000 
+gc 14: month: 1 population_influx: 8.000000 infection_level: 0.000000 
+tick 1
+gc 4: month: 1 population_influx: 16.000000 infection_level: 2.000000 
+gc 7: month: 1 population_influx: 10.000000 infection_level: 3.000000 
+gc 12: month: 1 population_influx: 18.000000 infection_level: 1.000000 
+gc 15: month: 1 population_influx: 15.000000 infection_level: 0.000000 
+gc 2: month: 1 population_influx: 10.000000 infection_level: 1.000000 
+gc 3: month: 1 population_influx: 9.000000 infection_level: 4.000000 
+gc 5: month: 1 population_influx: 12.000000 infection_level: 0.000000 
+gc 1: month: 1 population_influx: 16.000000 infection_level: 0.000000 
+gc 16: month: 1 population_influx: 7.000000 infection_level: 3.000000 
+gc 6: month: 1 population_influx: 13.000000 infection_level: 0.000000 
+C17: month: 1 live_squirrels: 31 infected: 1 
+gc 5: month: 2 population_influx: 18.000000 infection_level: 0.000000 
+gc 10: month: 2 population_influx: 24.000000 infection_level: 3.000000 
+gc 13: month: 2 population_influx: 19.000000 infection_level: 1.000000 
+gc 14: month: 2 population_influx: 19.000000 infection_level: 0.000000 
+gc 16: month: 2 population_influx: 12.000000 infection_level: 3.000000 
+tick 2
+gc 4: month: 2 population_influx: 23.000000 infection_level: 2.000000 
+gc 15: month: 2 population_influx: 21.000000 infection_level: 0.000000 
+gc 2: month: 2 population_influx: 24.000000 infection_level: 1.000000 
+gc 12: month: 2 population_influx: 27.000000 infection_level: 1.000000 
+gc 7: month: 2 population_influx: 17.000000 infection_level: 3.000000 
+gc 6: month: 2 population_influx: 20.000000 infection_level: 2.000000 
+gc 11: month: 2 population_influx: 27.000000 infection_level: 1.000000 
+gc 1: month: 2 population_influx: 24.000000 infection_level: 0.000000 
+gc 8: month: 2 population_influx: 26.000000 infection_level: 2.000000 
+C17: month: 2 live_squirrels: 31 infected: 1 
+gc 3: month: 2 population_influx: 19.000000 infection_level: 5.000000 
+gc 9: month: 2 population_influx: 21.000000 infection_level: 0.000000 
+gc 7: month: 3 population_influx: 22.000000 infection_level: 0.000000 
+gc 11: month: 3 population_influx: 33.000000 infection_level: 1.000000 
+gc 12: month: 3 population_influx: 40.000000 infection_level: 0.000000 
+gc 14: month: 3 population_influx: 24.000000 infection_level: 0.000000 
+gc 16: month: 3 population_influx: 19.000000 infection_level: 1.000000 
+tick 3
+gc 5: month: 3 population_influx: 28.000000 infection_level: 0.000000 
+gc 15: month: 3 population_influx: 32.000000 infection_level: 0.000000 
+gc 2: month: 3 population_influx: 33.000000 infection_level: 1.000000 
+gc 4: month: 3 population_influx: 33.000000 infection_level: 0.000000 
+gc 6: month: 3 population_influx: 26.000000 infection_level: 2.000000 
+gc 8: month: 3 population_influx: 38.000000 infection_level: 0.000000 
+gc 3: month: 3 population_influx: 28.000000 infection_level: 1.000000 
+C17: month: 3 live_squirrels: 31 infected: 1 
+gc 9: month: 3 population_influx: 31.000000 infection_level: 0.000000 
+gc 1: month: 3 population_influx: 28.000000 infection_level: 0.000000 
+gc 10: month: 3 population_influx: 33.000000 infection_level: 2.000000 
+gc 13: month: 3 population_influx: 28.000000 infection_level: 1.000000 
+gc 1: month: 4 population_influx: 19.000000 infection_level: 0.000000 
+gc 5: month: 4 population_influx: 23.000000 infection_level: 0.000000 
+gc 7: month: 4 population_influx: 23.000000 infection_level: 1.000000 
+gc 9: month: 4 population_influx: 30.000000 infection_level: 0.000000 
+gc 12: month: 4 population_influx: 35.000000 infection_level: 0.000000 
+gc 16: month: 4 population_influx: 23.000000 infection_level: 1.000000 
+tick 4
+gc 2: month: 4 population_influx: 32.000000 infection_level: 1.000000 
+gc 3: month: 4 population_influx: 27.000000 infection_level: 0.000000 
+gc 4: month: 4 population_influx: 20.000000 infection_level: 0.000000 
+gc 6: month: 4 population_influx: 28.000000 infection_level: 1.000000 
+gc 8: month: 4 population_influx: 33.000000 infection_level: 0.000000 
+gc 10: month: 4 population_influx: 29.000000 infection_level: 0.000000 
+gc 13: month: 4 population_influx: 28.000000 infection_level: 2.000000 
+gc 14: month: 4 population_influx: 26.000000 infection_level: 0.000000 
+gc 15: month: 4 population_influx: 35.000000 infection_level: 0.000000 
+C17: month: 4 live_squirrels: 33 infected: 1 
+gc 11: month: 4 population_influx: 25.000000 infection_level: 0.000000 
+gc 1: month: 5 population_influx: 20.000000 infection_level: 0.000000 
+gc 5: month: 5 population_influx: 21.000000 infection_level: 0.000000 
+gc 7: month: 5 population_influx: 27.000000 infection_level: 1.000000 
+gc 11: month: 5 population_influx: 24.000000 infection_level: 0.000000 
+gc 12: month: 5 population_influx: 36.000000 infection_level: 0.000000 
+gc 13: month: 5 population_influx: 32.000000 infection_level: 1.000000 
+tick 5
+C17: month: 5 live_squirrels: 32 infected: 0 
+gc 2: month: 5 population_influx: 25.000000 infection_level: 0.000000 
+gc 4: month: 5 population_influx: 22.000000 infection_level: 0.000000 
+gc 6: month: 5 population_influx: 30.000000 infection_level: 1.000000 
+gc 8: month: 5 population_influx: 36.000000 infection_level: 0.000000 
+gc 14: month: 5 population_influx: 21.000000 infection_level: 0.000000 
+gc 3: month: 5 population_influx: 30.000000 infection_level: 0.000000 
+gc 10: month: 5 population_influx: 25.000000 infection_level: 0.000000 
+gc 15: month: 5 population_influx: 32.000000 infection_level: 0.000000 
+gc 9: month: 5 population_influx: 29.000000 infection_level: 0.000000 
+gc 16: month: 5 population_influx: 25.000000 infection_level: 0.000000 
+gc 5: month: 6 population_influx: 23.000000 infection_level: 0.000000 
+gc 11: month: 6 population_influx: 27.000000 infection_level: 0.000000 
+gc 13: month: 6 population_influx: 36.000000 infection_level: 0.000000 
+tick 6
+gc 1: month: 6 population_influx: 25.000000 infection_level: 0.000000 
+gc 2: month: 6 population_influx: 28.000000 infection_level: 0.000000 
+gc 10: month: 6 population_influx: 28.000000 infection_level: 0.000000 
+gc 6: month: 6 population_influx: 31.000000 infection_level: 0.000000 
+gc 8: month: 6 population_influx: 30.000000 infection_level: 0.000000 
+gc 14: month: 6 population_influx: 21.000000 infection_level: 0.000000 
+gc 4: month: 6 population_influx: 21.000000 infection_level: 0.000000 
+gc 3: month: 6 population_influx: 29.000000 infection_level: 0.000000 
+gc 15: month: 6 population_influx: 28.000000 infection_level: 0.000000 
+C17: month: 6 live_squirrels: 32 infected: 0 
+gc 9: month: 6 population_influx: 31.000000 infection_level: 0.000000 
+gc 16: month: 6 population_influx: 28.000000 infection_level: 0.000000 
+gc 7: month: 6 population_influx: 36.000000 infection_level: 0.000000 
+gc 12: month: 6 population_influx: 35.000000 infection_level: 0.000000 
+gc 1: month: 7 population_influx: 34.000000 infection_level: 0.000000 
+gc 2: month: 7 population_influx: 30.000000 infection_level: 0.000000 
+gc 6: month: 7 population_influx: 26.000000 infection_level: 0.000000 
+gc 8: month: 7 population_influx: 34.000000 infection_level: 0.000000 
+gc 10: month: 7 population_influx: 35.000000 infection_level: 0.000000 
+tick 7
+gc 5: month: 7 population_influx: 26.000000 infection_level: 0.000000 
+gc 14: month: 7 population_influx: 31.000000 infection_level: 0.000000 
+gc 4: month: 7 population_influx: 31.000000 infection_level: 0.000000 
+gc 3: month: 7 population_influx: 34.000000 infection_level: 0.000000 
+gc 9: month: 7 population_influx: 34.000000 infection_level: 0.000000 
+C17: month: 7 live_squirrels: 32 infected: 0 
+gc 15: month: 7 population_influx: 29.000000 infection_level: 0.000000 
+gc 7: month: 7 population_influx: 38.000000 infection_level: 0.000000 
+gc 16: month: 7 population_influx: 35.000000 infection_level: 0.000000 
+gc 12: month: 7 population_influx: 31.000000 infection_level: 0.000000 
+gc 11: month: 7 population_influx: 34.000000 infection_level: 0.000000 
+gc 13: month: 7 population_influx: 37.000000 infection_level: 0.000000 
+gc 5: month: 8 population_influx: 35.000000 infection_level: 0.000000 
+gc 6: month: 8 population_influx: 29.000000 infection_level: 0.000000 
+gc 8: month: 8 population_influx: 39.000000 infection_level: 0.000000 
+gc 10: month: 8 population_influx: 43.000000 infection_level: 0.000000 
+gc 13: month: 8 population_influx: 43.000000 infection_level: 0.000000 
+gc 14: month: 8 population_influx: 37.000000 infection_level: 0.000000 
+tick 8
+gc 3: month: 8 population_influx: 33.000000 infection_level: 0.000000 
+gc 4: month: 8 population_influx: 34.000000 infection_level: 0.000000 
+gc 9: month: 8 population_influx: 36.000000 infection_level: 0.000000 
+C17: month: 8 live_squirrels: 32 infected: 0 
+gc 15: month: 8 population_influx: 35.000000 infection_level: 0.000000 
+gc 7: month: 8 population_influx: 41.000000 infection_level: 0.000000 
+gc 16: month: 8 population_influx: 41.000000 infection_level: 0.000000 
+gc 12: month: 8 population_influx: 28.000000 infection_level: 0.000000 
+gc 11: month: 8 population_influx: 36.000000 infection_level: 0.000000 
+gc 2: month: 8 population_influx: 31.000000 infection_level: 0.000000 
+gc 1: month: 8 population_influx: 37.000000 infection_level: 0.000000 
+gc 1: month: 9 population_influx: 44.000000 infection_level: 0.000000 
+gc 2: month: 9 population_influx: 41.000000 infection_level: 0.000000 
+gc 10: month: 9 population_influx: 46.000000 infection_level: 0.000000 
+gc 11: month: 9 population_influx: 39.000000 infection_level: 0.000000 
+gc 16: month: 9 population_influx: 49.000000 infection_level: 0.000000 
+tick 9
+gc 13: month: 9 population_influx: 42.000000 infection_level: 0.000000 
+gc 8: month: 9 population_influx: 47.000000 infection_level: 0.000000 
+gc 14: month: 9 population_influx: 53.000000 infection_level: 0.000000 
+gc 5: month: 9 population_influx: 38.000000 infection_level: 0.000000 
+gc 3: month: 9 population_influx: 30.000000 infection_level: 0.000000 
+gc 4: month: 9 population_influx: 43.000000 infection_level: 0.000000 
+gc 6: month: 9 population_influx: 34.000000 infection_level: 0.000000 
+gc 9: month: 9 population_influx: 42.000000 infection_level: 0.000000 
+C17: month: 9 live_squirrels: 32 infected: 0 
+gc 15: month: 9 population_influx: 46.000000 infection_level: 0.000000 
+gc 7: month: 9 population_influx: 41.000000 infection_level: 0.000000 
+gc 12: month: 9 population_influx: 29.000000 infection_level: 0.000000 
+gc 1: month: 10 population_influx: 34.000000 infection_level: 0.000000 
+gc 2: month: 10 population_influx: 49.000000 infection_level: 0.000000 
+gc 10: month: 10 population_influx: 44.000000 infection_level: 0.000000 
+gc 12: month: 10 population_influx: 36.000000 infection_level: 0.000000 
+gc 16: month: 10 population_influx: 43.000000 infection_level: 0.000000 
+tick 10
+gc 13: month: 10 population_influx: 36.000000 infection_level: 0.000000 
+gc 8: month: 10 population_influx: 36.000000 infection_level: 0.000000 
+gc 3: month: 10 population_influx: 24.000000 infection_level: 0.000000 
+gc 5: month: 10 population_influx: 39.000000 infection_level: 0.000000 
+gc 6: month: 10 population_influx: 34.000000 infection_level: 0.000000 
+gc 9: month: 10 population_influx: 42.000000 infection_level: 0.000000 
+C17: month: 10 live_squirrels: 32 infected: 0 
+gc 15: month: 10 population_influx: 40.000000 infection_level: 0.000000 
+gc 7: month: 10 population_influx: 37.000000 infection_level: 0.000000 
+gc 14: month: 10 population_influx: 41.000000 infection_level: 0.000000 
+gc 4: month: 10 population_influx: 39.000000 infection_level: 0.000000 
+gc 11: month: 10 population_influx: 37.000000 infection_level: 0.000000 
+gc 1: month: 11 population_influx: 39.000000 infection_level: 0.000000 
+gc 2: month: 11 population_influx: 51.000000 infection_level: 0.000000 
+gc 10: month: 11 population_influx: 33.000000 infection_level: 0.000000 
+gc 13: month: 11 population_influx: 30.000000 infection_level: 0.000000 
+tick 11
+gc 8: month: 11 population_influx: 33.000000 infection_level: 0.000000 
+gc 12: month: 11 population_influx: 37.000000 infection_level: 0.000000 
+gc 3: month: 11 population_influx: 16.000000 infection_level: 0.000000 
+gc 5: month: 11 population_influx: 35.000000 infection_level: 0.000000 
+gc 6: month: 11 population_influx: 35.000000 infection_level: 0.000000 
+gc 9: month: 11 population_influx: 38.000000 infection_level: 0.000000 
+C17: month: 11 live_squirrels: 32 infected: 0 
+gc 15: month: 11 population_influx: 43.000000 infection_level: 0.000000 
+gc 7: month: 11 population_influx: 36.000000 infection_level: 0.000000 
+gc 14: month: 11 population_influx: 45.000000 infection_level: 0.000000 
+gc 4: month: 11 population_influx: 36.000000 infection_level: 0.000000 
+gc 11: month: 11 population_influx: 35.000000 infection_level: 0.000000 
+gc 16: month: 11 population_influx: 40.000000 infection_level: 0.000000 
+gc 4: month: 12 population_influx: 26.000000 infection_level: 0.000000 
+gc 7: month: 12 population_influx: 39.000000 infection_level: 0.000000 
+gc 11: month: 12 population_influx: 34.000000 infection_level: 0.000000 
+gc 14: month: 12 population_influx: 35.000000 infection_level: 0.000000 
+tick 12
+gc 16: month: 12 population_influx: 32.000000 infection_level: 0.000000 
+gc 10: month: 12 population_influx: 33.000000 infection_level: 0.000000 
+gc 1: month: 12 population_influx: 39.000000 infection_level: 0.000000 
+gc 13: month: 12 population_influx: 34.000000 infection_level: 0.000000 
+gc 2: month: 12 population_influx: 41.000000 infection_level: 0.000000 
+gc 8: month: 12 population_influx: 33.000000 infection_level: 0.000000 
+gc 5: month: 12 population_influx: 31.000000 infection_level: 0.000000 
+gc 12: month: 12 population_influx: 38.000000 infection_level: 0.000000 
+gc 3: month: 12 population_influx: 26.000000 infection_level: 0.000000 
+gc 6: month: 12 population_influx: 43.000000 infection_level: 0.000000 
+gc 9: month: 12 population_influx: 31.000000 infection_level: 0.000000 
+C17: month: 12 live_squirrels: 32 infected: 0 
+gc 15: month: 12 population_influx: 29.000000 infection_level: 0.000000 
+gc 3: month: 13 population_influx: 24.000000 infection_level: 0.000000 
+gc 6: month: 13 population_influx: 44.000000 infection_level: 0.000000 
+gc 11: month: 13 population_influx: 30.000000 infection_level: 0.000000 
+gc 14: month: 13 population_influx: 37.000000 infection_level: 0.000000 
+gc 16: month: 13 population_influx: 26.000000 infection_level: 0.000000 
+tick 13
+gc 2: month: 13 population_influx: 33.000000 infection_level: 0.000000 
+gc 4: month: 13 population_influx: 30.000000 infection_level: 0.000000 
+gc 13: month: 13 population_influx: 38.000000 infection_level: 0.000000 
+gc 5: month: 13 population_influx: 25.000000 infection_level: 0.000000 
+gc 8: month: 13 population_influx: 45.000000 infection_level: 0.000000 
+gc 12: month: 13 population_influx: 29.000000 infection_level: 0.000000 
+gc 10: month: 13 population_influx: 28.000000 infection_level: 0.000000 
+gc 9: month: 13 population_influx: 30.000000 infection_level: 0.000000 
+C17: month: 13 live_squirrels: 32 infected: 0 
+gc 15: month: 13 population_influx: 22.000000 infection_level: 0.000000 
+gc 1: month: 13 population_influx: 50.000000 infection_level: 0.000000 
+gc 7: month: 13 population_influx: 40.000000 infection_level: 0.000000 
+gc 1: month: 14 population_influx: 41.000000 infection_level: 0.000000 
+gc 2: month: 14 population_influx: 34.000000 infection_level: 0.000000 
+gc 3: month: 14 population_influx: 28.000000 infection_level: 0.000000 
+gc 6: month: 14 population_influx: 38.000000 infection_level: 0.000000 
+gc 7: month: 14 population_influx: 33.000000 infection_level: 0.000000 
+gc 11: month: 14 population_influx: 30.000000 infection_level: 0.000000 
+gc 16: month: 14 population_influx: 27.000000 infection_level: 0.000000 
+tick 14
+gc 4: month: 14 population_influx: 28.000000 infection_level: 0.000000 
+gc 13: month: 14 population_influx: 41.000000 infection_level: 0.000000 
+gc 8: month: 14 population_influx: 38.000000 infection_level: 0.000000 
+gc 12: month: 14 population_influx: 28.000000 infection_level: 0.000000 
+gc 10: month: 14 population_influx: 28.000000 infection_level: 0.000000 
+gc 9: month: 14 population_influx: 33.000000 infection_level: 0.000000 
+C17: month: 14 live_squirrels: 32 infected: 0 
+gc 15: month: 14 population_influx: 20.000000 infection_level: 0.000000 
+gc 5: month: 14 population_influx: 30.000000 infection_level: 0.000000 
+gc 14: month: 14 population_influx: 32.000000 infection_level: 0.000000 
+gc 2: month: 15 population_influx: 37.000000 infection_level: 0.000000 
+gc 3: month: 15 population_influx: 27.000000 infection_level: 0.000000 
+gc 7: month: 15 population_influx: 26.000000 infection_level: 0.000000 
+gc 11: month: 15 population_influx: 25.000000 infection_level: 0.000000 
+gc 14: month: 15 population_influx: 31.000000 infection_level: 0.000000 
+gc 16: month: 15 population_influx: 27.000000 infection_level: 0.000000 
+tick 15
+gc 13: month: 15 population_influx: 34.000000 infection_level: 0.000000 
+gc 1: month: 15 population_influx: 32.000000 infection_level: 0.000000 
+gc 4: month: 15 population_influx: 26.000000 infection_level: 0.000000 
+gc 8: month: 15 population_influx: 33.000000 infection_level: 0.000000 
+gc 12: month: 15 population_influx: 25.000000 infection_level: 0.000000 
+gc 10: month: 15 population_influx: 22.000000 infection_level: 0.000000 
+gc 9: month: 15 population_influx: 35.000000 infection_level: 0.000000 
+C17: month: 15 live_squirrels: 32 infected: 0 
+gc 5: month: 15 population_influx: 27.000000 infection_level: 0.000000 
+gc 15: month: 15 population_influx: 28.000000 infection_level: 0.000000 
+gc 6: month: 15 population_influx: 31.000000 infection_level: 0.000000 
+gc 1: month: 16 population_influx: 27.000000 infection_level: 0.000000 
+gc 2: month: 16 population_influx: 38.000000 infection_level: 0.000000 
+gc 3: month: 16 population_influx: 31.000000 infection_level: 0.000000 
+gc 7: month: 16 population_influx: 25.000000 infection_level: 0.000000 
+gc 14: month: 16 population_influx: 24.000000 infection_level: 0.000000 
+gc 16: month: 16 population_influx: 30.000000 infection_level: 0.000000 
+tick 16
+gc 9: month: 16 population_influx: 30.000000 infection_level: 0.000000 
+gc 13: month: 16 population_influx: 27.000000 infection_level: 0.000000 
+gc 4: month: 16 population_influx: 23.000000 infection_level: 0.000000 
+gc 8: month: 16 population_influx: 20.000000 infection_level: 0.000000 
+gc 12: month: 16 population_influx: 27.000000 infection_level: 0.000000 
+gc 10: month: 16 population_influx: 22.000000 infection_level: 0.000000 
+gc 15: month: 16 population_influx: 28.000000 infection_level: 0.000000 
+C17: month: 16 live_squirrels: 32 infected: 0 
+gc 5: month: 16 population_influx: 33.000000 infection_level: 0.000000 
+gc 6: month: 16 population_influx: 29.000000 infection_level: 0.000000 
+gc 11: month: 16 population_influx: 25.000000 infection_level: 0.000000 
+gc 5: month: 17 population_influx: 34.000000 infection_level: 0.000000 
+gc 10: month: 17 population_influx: 33.000000 infection_level: 0.000000 
+gc 12: month: 17 population_influx: 39.000000 infection_level: 0.000000 
+gc 15: month: 17 population_influx: 29.000000 infection_level: 0.000000 
+tick 17
+gc 11: month: 17 population_influx: 31.000000 infection_level: 0.000000 
+gc 16: month: 17 population_influx: 32.000000 infection_level: 0.000000 
+gc 1: month: 17 population_influx: 30.000000 infection_level: 0.000000 
+gc 3: month: 17 population_influx: 36.000000 infection_level: 0.000000 
+gc 7: month: 17 population_influx: 28.000000 infection_level: 0.000000 
+gc 14: month: 17 population_influx: 27.000000 infection_level: 0.000000 
+gc 2: month: 17 population_influx: 40.000000 infection_level: 0.000000 
+gc 6: month: 17 population_influx: 32.000000 infection_level: 0.000000 
+gc 13: month: 17 population_influx: 29.000000 infection_level: 0.000000 
+gc 4: month: 17 population_influx: 28.000000 infection_level: 0.000000 
+C17: month: 17 live_squirrels: 33 infected: 0 
+gc 8: month: 17 population_influx: 31.000000 infection_level: 0.000000 
+gc 9: month: 17 population_influx: 30.000000 infection_level: 0.000000 
+gc 13: month: 18 population_influx: 28.000000 infection_level: 0.000000 
+gc 15: month: 18 population_influx: 30.000000 infection_level: 0.000000 
+tick 18
+gc 11: month: 18 population_influx: 37.000000 infection_level: 0.000000 
+gc 7: month: 18 population_influx: 29.000000 infection_level: 0.000000 
+gc 16: month: 18 population_influx: 36.000000 infection_level: 0.000000 
+gc 5: month: 18 population_influx: 34.000000 infection_level: 0.000000 
+gc 14: month: 18 population_influx: 29.000000 infection_level: 0.000000 
+gc 2: month: 18 population_influx: 34.000000 infection_level: 0.000000 
+gc 6: month: 18 population_influx: 35.000000 infection_level: 0.000000 
+C17: month: 18 live_squirrels: 33 infected: 0 
+gc 3: month: 18 population_influx: 33.000000 infection_level: 0.000000 
+gc 4: month: 18 population_influx: 33.000000 infection_level: 0.000000 
+gc 8: month: 18 population_influx: 24.000000 infection_level: 0.000000 
+gc 12: month: 18 population_influx: 44.000000 infection_level: 0.000000 
+gc 1: month: 18 population_influx: 32.000000 infection_level: 0.000000 
+gc 9: month: 18 population_influx: 28.000000 infection_level: 0.000000 
+gc 10: month: 18 population_influx: 34.000000 infection_level: 0.000000 
+gc 4: month: 19 population_influx: 28.000000 infection_level: 0.000000 
+gc 12: month: 19 population_influx: 43.000000 infection_level: 0.000000 
+gc 13: month: 19 population_influx: 32.000000 infection_level: 0.000000 
+gc 15: month: 19 population_influx: 38.000000 infection_level: 0.000000 
+tick 19
+gc 7: month: 19 population_influx: 28.000000 infection_level: 0.000000 
+gc 11: month: 19 population_influx: 36.000000 infection_level: 0.000000 
+gc 16: month: 19 population_influx: 44.000000 infection_level: 0.000000 
+gc 5: month: 19 population_influx: 30.000000 infection_level: 0.000000 
+gc 14: month: 19 population_influx: 34.000000 infection_level: 0.000000 
+gc 2: month: 19 population_influx: 32.000000 infection_level: 0.000000 
+gc 6: month: 19 population_influx: 33.000000 infection_level: 0.000000 
+C17: month: 19 live_squirrels: 33 infected: 0 
+gc 3: month: 19 population_influx: 28.000000 infection_level: 0.000000 
+gc 8: month: 19 population_influx: 31.000000 infection_level: 0.000000 
+gc 10: month: 19 population_influx: 37.000000 infection_level: 0.000000 
+gc 9: month: 19 population_influx: 26.000000 infection_level: 0.000000 
+gc 1: month: 19 population_influx: 35.000000 infection_level: 0.000000 
+gc 1: month: 20 population_influx: 33.000000 infection_level: 0.000000 
+gc 7: month: 20 population_influx: 29.000000 infection_level: 0.000000 
+gc 10: month: 20 population_influx: 29.000000 infection_level: 0.000000 
+gc 11: month: 20 population_influx: 33.000000 infection_level: 0.000000 
+gc 12: month: 20 population_influx: 40.000000 infection_level: 0.000000 
+tick 20
+gc 5: month: 20 population_influx: 23.000000 infection_level: 0.000000 
+gc 2: month: 20 population_influx: 27.000000 infection_level: 0.000000 
+gc 6: month: 20 population_influx: 35.000000 infection_level: 0.000000 
+gc 16: month: 20 population_influx: 42.000000 infection_level: 0.000000 
+gc 4: month: 20 population_influx: 24.000000 infection_level: 0.000000 
+gc 14: month: 20 population_influx: 30.000000 infection_level: 0.000000 
+gc 3: month: 20 population_influx: 23.000000 infection_level: 0.000000 
+C17: month: 20 live_squirrels: 33 infected: 0 
+gc 8: month: 20 population_influx: 26.000000 infection_level: 0.000000 
+gc 9: month: 20 population_influx: 27.000000 infection_level: 0.000000 
+gc 15: month: 20 population_influx: 35.000000 infection_level: 0.000000 
+gc 13: month: 20 population_influx: 32.000000 infection_level: 0.000000 
+gc 7: month: 21 population_influx: 25.000000 infection_level: 0.000000 
+gc 8: month: 21 population_influx: 32.000000 infection_level: 0.000000 
+gc 10: month: 21 population_influx: 25.000000 infection_level: 0.000000 
+gc 11: month: 21 population_influx: 35.000000 infection_level: 0.000000 
+gc 12: month: 21 population_influx: 41.000000 infection_level: 0.000000 
+tick 21
+gc 5: month: 21 population_influx: 28.000000 infection_level: 0.000000 
+gc 2: month: 21 population_influx: 25.000000 infection_level: 0.000000 
+gc 16: month: 21 population_influx: 37.000000 infection_level: 0.000000 
+gc 6: month: 21 population_influx: 25.000000 infection_level: 0.000000 
+gc 14: month: 21 population_influx: 29.000000 infection_level: 0.000000 
+gc 4: month: 21 population_influx: 21.000000 infection_level: 0.000000 
+gc 15: month: 21 population_influx: 26.000000 infection_level: 0.000000 
+C17: month: 21 live_squirrels: 33 infected: 0 
+gc 9: month: 21 population_influx: 26.000000 infection_level: 0.000000 
+gc 13: month: 21 population_influx: 41.000000 infection_level: 0.000000 
+gc 3: month: 21 population_influx: 31.000000 infection_level: 0.000000 
+gc 1: month: 21 population_influx: 32.000000 infection_level: 0.000000 
+gc 2: month: 22 population_influx: 25.000000 infection_level: 0.000000 
+gc 4: month: 22 population_influx: 30.000000 infection_level: 0.000000 
+gc 5: month: 22 population_influx: 34.000000 infection_level: 0.000000 
+gc 6: month: 22 population_influx: 31.000000 infection_level: 0.000000 
+gc 7: month: 22 population_influx: 28.000000 infection_level: 0.000000 
+gc 14: month: 22 population_influx: 30.000000 infection_level: 0.000000 
+gc 16: month: 22 population_influx: 36.000000 infection_level: 0.000000 
+tick 22
+gc 12: month: 22 population_influx: 43.000000 infection_level: 0.000000 
+C17: month: 22 live_squirrels: 33 infected: 0 
+gc 9: month: 22 population_influx: 29.000000 infection_level: 0.000000 
+gc 3: month: 22 population_influx: 36.000000 infection_level: 0.000000 
+gc 10: month: 22 population_influx: 25.000000 infection_level: 0.000000 
+gc 13: month: 22 population_influx: 43.000000 infection_level: 0.000000 
+gc 8: month: 22 population_influx: 34.000000 infection_level: 0.000000 
+gc 1: month: 22 population_influx: 31.000000 infection_level: 0.000000 
+gc 11: month: 22 population_influx: 43.000000 infection_level: 0.000000 
+gc 15: month: 22 population_influx: 24.000000 infection_level: 0.000000 
+gc 3: month: 23 population_influx: 36.000000 infection_level: 0.000000 
+gc 6: month: 23 population_influx: 23.000000 infection_level: 0.000000 
+gc 7: month: 23 population_influx: 26.000000 infection_level: 0.000000 
+gc 8: month: 23 population_influx: 30.000000 infection_level: 0.000000 
+gc 11: month: 23 population_influx: 40.000000 infection_level: 0.000000 
+gc 13: month: 23 population_influx: 45.000000 infection_level: 0.000000 
+gc 14: month: 23 population_influx: 28.000000 infection_level: 0.000000 
+gc 15: month: 23 population_influx: 24.000000 infection_level: 0.000000 
+gc 16: month: 23 population_influx: 32.000000 infection_level: 0.000000 
+tick 23
+gc 1: month: 23 population_influx: 31.000000 infection_level: 0.000000 
+gc 9: month: 23 population_influx: 30.000000 infection_level: 0.000000 
+C17: month: 23 live_squirrels: 33 infected: 0 
+gc 10: month: 23 population_influx: 27.000000 infection_level: 0.000000 
+gc 4: month: 23 population_influx: 28.000000 infection_level: 0.000000 
+gc 12: month: 23 population_influx: 42.000000 infection_level: 0.000000 
+gc 5: month: 23 population_influx: 39.000000 infection_level: 0.000000 
+gc 2: month: 23 population_influx: 32.000000 infection_level: 0.000000 
+18: clock shutdown after 24 months
+master done 
+gc 1: DONE: pop: 31.000000, inf: 0.000000
+gc 2: DONE: pop: 32.000000, inf: 0.000000
+gc 6: DONE: pop: 23.000000, inf: 0.000000
+gc 7: DONE: pop: 26.000000, inf: 0.000000
+gc 11: DONE: pop: 40.000000, inf: 0.000000
+gc 5: DONE: pop: 39.000000, inf: 0.000000
+gc 13: DONE: pop: 45.000000, inf: 0.000000
+gc 14: DONE: pop: 28.000000, inf: 0.000000
+gc 8: DONE: pop: 30.000000, inf: 0.000000
+gc 16: DONE: pop: 32.000000, inf: 0.000000
+gc 10: DONE: pop: 27.000000, inf: 0.000000
+gc 15: DONE: pop: 24.000000, inf: 0.000000
+gc 12: DONE: pop: 42.000000, inf: 0.000000
+gc 9: DONE: pop: 30.000000, inf: 0.000000
+gc 4: DONE: pop: 28.000000, inf: 0.000000
+C17: Final squirrels: 33 Infected Squirrels: 0
+gc 3: DONE: pop: 36.000000, inf: 0.000000

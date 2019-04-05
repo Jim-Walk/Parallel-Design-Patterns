@@ -22,31 +22,28 @@ void Master::set_up_sim(){
     float loc_vec[2] = {2.0, 2.0}; // all initial squirells are created at this location
     // Create grid cells - we do this first so they always have rank 1-16
     for (int i=0; i<num_grid_cells; i++){
-        cmd = actor_type::GRID; 
         workerRank = startWorkerProcess();
-        MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
+        send_msg(workerRank, actor_type::GRID);
     }
     // Create Controller with rank 17
-    cmd = actor_type::CONTROL;
     workerRank = startWorkerProcess();
-    MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
+    send_msg(workerRank, actor_type::CONTROL);
     // Create clock with rank 18
-    cmd = actor_type::CLOCK;
     workerRank = startWorkerProcess();
-    MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
+    send_msg(workerRank, actor_type::CLOCK);
     // Create healthy squirrles
     for (int i=0; i<live_squirrels-inf_count; i++){
-        cmd = actor_type::SQ; 
         workerRank = startWorkerProcess();
-        MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
-        MPI_Ssend(loc_vec, 2, MPI_FLOAT, workerRank, 0, MPI_COMM_WORLD);
+        send_msg(workerRank, actor_type::SQ);
+        //TODO Abstract this
+        MPI_Bsend(loc_vec, 2, MPI_FLOAT, workerRank, 0, MPI_COMM_WORLD);
     }
     // Create infected squirrels
     for (int i=live_squirrels-inf_count; i<live_squirrels; i++){
-        cmd = actor_type::INFSQ; 
         workerRank = startWorkerProcess();
-        MPI_Ssend(&cmd, 1, MPI_INT, workerRank, 0, MPI_COMM_WORLD);
-        MPI_Ssend(loc_vec, 2, MPI_FLOAT, workerRank, 0, MPI_COMM_WORLD);
+        send_msg(workerRank, actor_type::INFSQ);
+        //TODO Abstract this
+        MPI_Bsend(loc_vec, 2, MPI_FLOAT, workerRank, 0, MPI_COMM_WORLD);
     }
     active = true;
 }

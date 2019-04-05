@@ -21,7 +21,7 @@ void Clock::run(){
         auto tend = std::chrono::system_clock::now();
         std::chrono::duration<double> diff = tend - tstart;
         // check active for 800 milliseconds
-        while (diff.count() < 2.90){
+        while (diff.count() < 0.050){
             tend = std::chrono::system_clock::now();
             diff = tend - tstart;
             check_active();

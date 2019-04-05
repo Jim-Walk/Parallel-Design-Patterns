@@ -23,8 +23,6 @@ void Controller::manage_squirrels(){
     bool recvd;
     int rank, msg = -1;
     float loc_vec[2];
-    // if a squirrel has died, add its id to the dead
-    // squirrels pool
     
     std::tie(recvd, rank, msg) = msg_recv();
     if (recvd){
@@ -39,8 +37,8 @@ void Controller::manage_squirrels(){
             int new_sq = startWorkerProcess();
             //std::cout << id << ": 🐿️  born ID: " << new_sq << std::endl;
             actor_type cmd = actor_type::SQ; 
-            MPI_Ssend(&cmd, 1, MPI_INT, new_sq, 0, MPI_COMM_WORLD);
-            MPI_Ssend(loc_vec, 2, MPI_FLOAT, new_sq, 0, MPI_COMM_WORLD);
+            MPI_Bsend(&cmd, 1, MPI_INT, new_sq, 0, MPI_COMM_WORLD);
+            MPI_Bsend(loc_vec, 2, MPI_FLOAT, new_sq, 0, MPI_COMM_WORLD);
             live_squirrels++;
         } 
         else if (msg == MSG::INFSTEP){
@@ -48,7 +46,8 @@ void Controller::manage_squirrels(){
             //std::cout << id << ": 🐿️   🤢  ID: " << rank <<std::endl;
         }
         else if (msg == MSG::TICK){
-            printf("C%d: live_squirrels: %d infected: %d \n", id, live_squirrels, inf_count);
+            month++;
+            printf("C%d: month: %d live_squirrels: %d infected: %d \n", id, month, live_squirrels, inf_count);
         }
     }
 }
