@@ -14,3 +14,4 @@ For example
 mpirun -n 200 ./bin/main 200 24 4 24
 ```
 
+If you're on a system with PBS, you can instead just `qsub run.pbs`
