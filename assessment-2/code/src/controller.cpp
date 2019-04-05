@@ -37,8 +37,8 @@ void Controller::manage_squirrels(){
             int new_sq = startWorkerProcess();
             //std::cout << id << ": 🐿️  born ID: " << new_sq << std::endl;
             actor_type cmd = actor_type::SQ; 
-            MPI_Ssend(&cmd, 1, MPI_INT, new_sq, 0, MPI_COMM_WORLD);
-            MPI_Ssend(loc_vec, 2, MPI_FLOAT, new_sq, 0, MPI_COMM_WORLD);
+            MPI_Bsend(&cmd, 1, MPI_INT, new_sq, 0, MPI_COMM_WORLD);
+            MPI_Bsend(loc_vec, 2, MPI_FLOAT, new_sq, 0, MPI_COMM_WORLD);
             live_squirrels++;
         } 
         else if (msg == MSG::INFSTEP){
